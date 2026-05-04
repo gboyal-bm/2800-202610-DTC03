@@ -14,7 +14,7 @@ const BASE_URL: string = "https://api.openweathermap.org/data/2.5/weather?units=
  * @returns {json} A JSON with the {@link https://openweathermap.org/api/current?collection=current_forecast#cade2a7e39b5b8 current weather information}
  */
 async function getCurrent(lat: number, lon: number) {
-    const response = await fetch(`${BASE_URL}&lat=${lat}&lon=&{lon}&appid=${API_KEY}`);
+    const response = await fetch(`${BASE_URL}&lat=${lat}&lon=&${lon}&appid=${API_KEY}`);
     if (!response.ok) {
         throw new Error("Weather Network Response Was Not Ok");
     }
