@@ -21,3 +21,15 @@ async function getCurrent(lat: number, lon: number) {
 
     return await response.json();
 }
+
+/**
+ * Returns the current temperature in celsius
+ * 
+ * @param {number} lat The latitude coordinate
+ * @param {number} lon The longitude coordinate
+ * @returns The current temperature in Celsius
+ */
+async function getCurrentTempInCelsius(lat: number, lon: number) {
+    const data = await getCurrent(lat, lon);
+    return data.main.temp;
+}
