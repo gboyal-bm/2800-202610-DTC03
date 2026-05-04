@@ -33,3 +33,8 @@ async function getCurrentTempInCelsius(lat: number, lon: number) {
     const data = await getCurrent(lat, lon);
     return data.main.temp;
 }
+
+export const WeatherUtils = {
+    getCurrent,
+    getCurrentTempInCelsius
+}
