@@ -1,0 +1,19 @@
+{
+  "name": "shadowsmar_api",
+  "version": "1.0.0",
+  "description": "Shadowsmar shade application for database access.",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mongoose": "^9.6.1"
+  }
+}
