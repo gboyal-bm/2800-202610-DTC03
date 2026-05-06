@@ -11,7 +11,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 // Constants
-const { SALT_ROUNDS, PASSWORD_MIN_LENGTH } = require("../constants");
+const { SALT_ROUNDS, PASSWORD_MIN_LENGTH, VALID_EMAIL_REGEX } = require("../constants");
 
 /**
  * @description User account.
@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema({
         unique: true,
         lowercase: true,
         trim: true,
-        match: [/^\S+@\S+\.\S+$/, "Email must be of valid format."]
+        match: [VALID_EMAIL_REGEX, "Email must be of valid format."]
     },
     password: {
         type: String,
