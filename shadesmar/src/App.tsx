@@ -4,7 +4,7 @@ import { Home } from "./Pages/home";
 import { Exploration } from "./Pages/exploration";
 import { Map } from "./Pages/map";
 import { Profile } from "./Pages/profile";
-import Navbar from "./Components/navbar";
+import { Navbar } from "./components/navbar";
 
 function App() {
 	return (
