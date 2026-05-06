@@ -1,7 +1,8 @@
 /**
  * @fileoverview Shadesmar API server entrypoint
+ * @module server
  * 
- * 
+ * @description Initializes and starts the Shadesmar API server.
  */
 
 // Main setup
@@ -16,11 +17,16 @@ const MONGO_USER = process.env.MONGO_USER;
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 
 // Imports
+
+// External modules 
 const mongoose = require("mongoose");
 const session = require("express-session");
-const bcrypt = require("bcrypt");
 
-const accounts = require("/accounts.js");
+// Internal modules
+const sessionConfig = require("./config/session.js");
+
+// Routes
+const authRoutes = require("./routes/auth.js");
 
 // Start server
 
@@ -33,19 +39,9 @@ if (typeof require !== 'undefined' && require.main === module) {
 // - Schemas
 
 // Values
-const hashPassword = async function (text) {
-    return await bcrypt.hash(text, SALT_ROUNDS);
-};
-const SALT_ROUNDS = 10;
 
 
 // Schemas
-const SESSION_SCHEMA = {
-    secret: SESSION_KEY,
-    resave: true,
-    saveUninitialized: true,
-    cookie: { secure: false }
-}
 
 main();
 
@@ -64,43 +60,15 @@ function authenticate(req, res, next) {
 
 function main() {
     // Setup
-    app.use(session(SESSION_SCHEMA));
+    app.use(sessionConfig);
 
     // Start
     app.use(express.urlencoded({ extended: true }));
 
     // User Login
-    app.post("/login", async (req, res) => {
-        console.log("Logging user in");
+    app.use("/api/auth", authRoutes);
 
-        const { currentUser, passwordAttempt } = req.body;
-        const user = VALID_USERS.find(user => user.username == currentUser);
-        console.log("User Logging In:", currentUser);
-        console.log("User Found:", user?.username);
-        if (!user) {
-            console.log("Username not found.");
-            res.status(401).send("Username not found.");
-            return;
-        }
-        passwordSame = await bcrypt.compare(passwordAttempt, user.password);
-        console.log("Password Attempt:", passwordAttempt);
-        console.log("User Password:", user.password);
-        if (passwordSame) {
-            console.log("Login successful");
-            req.session.user = { username: user.username };
-
-            res.redirect("/home");
-            return;
-        } else {
-            console.log("Password is incorrect.");
-            res.status(401).send("Username or password is incorrect.");
-        }
-    });
-
-    /*
-        Auth Protected Pages
-    */
-    app.use(authenticate);
+    // Protected routes
     app.get("/home", (req, res) => {
         res.send("Going home");
     });
