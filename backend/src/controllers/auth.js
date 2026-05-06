@@ -61,7 +61,22 @@ const register = async (req, res) => {
     res.status(201).redirect("/home");
 };
 
-const login = async (req, res) => { }
+const login = async (req, res) => {
+    const { email, password, rememberMe } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+        return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    const passwordCorrect = await user.comparePassword(password);
+    if (!passwordCorrect) {
+        return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    startSession(req, user, rememberMe);
+    res.status(200).json({ message: "Login successful" });
+}
 
 const logout = async (req, res) => { }
 const me = async (req, res) => { }
