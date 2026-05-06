@@ -1,4 +1,16 @@
+import { useEffect } from "react";
+//import { homeTour } from "../Components/tours"; disabled for ease of developement
+
 export function Home() {
+	useEffect(() => {
+		const hasSeenTour = localStorage.getItem("map_tour_seen");
+
+		if (!hasSeenTour) {
+			//homeTour(); disabled for ease of developement
+			localStorage.setItem("home_tour_seen", "true");
+		}
+	}, []);
+
 	return (
 		<div className="min-h-screen flex flex-col bg-gray-50 text-gray-900">
 			{/* Hero / Carousel */}
@@ -12,7 +24,10 @@ export function Home() {
 					<p className="mb-8">This is a desription</p>
 
 					{/* Carousel placeholder */}
-					<div className="border-2 border-dashed border-gray-300 rounded-xl p-10 mb-8 bg-white">
+					<div
+						id="ActivitiesList"
+						className="border-2 border-dashed border-gray-300 rounded-xl p-10 mb-8 bg-white"
+					>
 						Carousel Placeholder
 					</div>
 
@@ -27,7 +42,7 @@ export function Home() {
 				<div className="max-w-6xl mx-auto px-6">
 					<h3 className="text-2xl font-bold mb-8 text-center">Our Features</h3>
 
-					<div className="grid gap-6 md:grid-cols-3">
+					<div id="FeaturesList" className="grid gap-6 md:grid-cols-3">
 						<div className="p-6 border rounded-lg hover:shadow-md transition">
 							Feature 1
 						</div>

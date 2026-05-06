@@ -3,7 +3,7 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { Home } from "./Pages/home";
 import { Map } from "./Pages/map";
 import { Profile } from "./Pages/profile";
-import Navbar from "./components/navbar";
+import Navbar from "./Components/navbar";
 
 function App() {
 	return (
