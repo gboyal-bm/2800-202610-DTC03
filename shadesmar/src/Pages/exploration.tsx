@@ -1,4 +1,5 @@
 import { ActivityCard } from "../components/activityCard";
+import { Map } from "./map";
 
 export function Exploration() {
   const placeholders = [
@@ -24,6 +25,8 @@ export function Exploration() {
         <header className="mb-12 text-center">
           <h1 className="text-4xl font-bold text-gray-900">Explore Activities</h1>
         </header>
+
+        <Map/>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {
