@@ -4,7 +4,7 @@
   "description": "Shadowsmar shade application for database access.",
   "license": "ISC",
   "author": "",
-  "type": "module",
+  "type": "commonjs",
   "main": "server.js",
   "scripts": {
     "test": "nodemon server.js"
