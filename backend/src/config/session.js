@@ -8,11 +8,15 @@
 // Imports
 const session = require("express-session")
 
-const SESSION_SCHEMA = {
-    secret: SESSION_KEY,
+// Constants
+const { SESSION_NAME } = require("../constants.js");
+
+const SESSION_CONFIG = {
+    name: SESSION_NAME,
+    secret: process.env.SESSION_KEY,
     resave: true,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: { secure: process.env.NODE_ENV === "production" }
 }
 
-module.exports = session(SESSION_SCHEMA);
+module.exports = session(SESSION_CONFIG);
