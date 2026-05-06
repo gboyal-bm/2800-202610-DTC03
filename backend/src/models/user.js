@@ -58,9 +58,10 @@ const userSchema = new mongoose.Schema({
 });
 
 /**
- * @description Hash the password before saving.
+ * @description Pre-save middleware to encrypt password before saving user info.
  * 
  * @function
+ * @description Hash the password.
  * @param {Function} next - The callback to the next middleware
  * @returns {Promise<void>}
  */
@@ -72,7 +73,8 @@ userSchema.pre("save", async function (next) {
 });
 
 /**
- @description Compare password attempt to stored password.
+ * @function comparePassword
+ * @description Compare password attempt to stored password.
  * 
  * @param {string} passwordAttempt - The plaintext password attempt
  * @returns {Promise<boolean>}     - Whether the password attempt is correct
