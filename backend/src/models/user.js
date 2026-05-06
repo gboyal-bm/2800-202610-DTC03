@@ -3,6 +3,7 @@
  * @module models/user
  * 
  * @description Defines the User schema and model for account authentication.
+ * @exports User
  */
 
 // Imports
@@ -10,7 +11,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 // Constants
-const { SALT_ROUNDS } = require("../constants");
+const { SALT_ROUNDS, PASSWORD_MIN_LENGTH } = require("../constants");
 
 /**
  * @description User account.
@@ -47,7 +48,10 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLength: [1, "Password cannot be empty."],
+        minLength: [
+            PASSWORD_MIN_LENGTH,
+            `Password must be at least ${PASSWORD_MIN_LENGTH} characters long`
+        ],
         select: false
     },
     createdAt: {
