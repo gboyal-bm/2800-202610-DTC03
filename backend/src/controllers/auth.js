@@ -16,7 +16,15 @@
 const { startSession, validateNewUser } = require("../utils/auth");
 
 const User = require("../models/user");
+const { SESSION_NAME } = require("../constants");
 
+/**
+ * @function register
+ * @description Attempts to register a new user and start a session.
+ * 
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const register = async (req, res) => {
     const { email, username, password, rememberMe } = req.body;
     const errorMessages = [];
@@ -32,12 +40,10 @@ const register = async (req, res) => {
 
     const userExists = await User.exists({ email });
     if (userExists) {
-        errorMessages.push("Account already exists.");
         return res.status(409).json({
             message: "Account already exists"
         });
     }
-    return errorMessages;
 
     const newUser = new User({ username, email, password });
     try {
@@ -61,6 +67,13 @@ const register = async (req, res) => {
     res.status(201).redirect("/home");
 };
 
+/**
+ * @function login
+ * @description Attempts to log in a user and start a session.
+ * 
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const login = async (req, res) => {
     const { email, password, rememberMe } = req.body;
 
@@ -78,12 +91,48 @@ const login = async (req, res) => {
     res.status(200).json({ message: "Login successful" });
 }
 
-const logout = async (req, res) => { }
-const me = async (req, res) => { }
+/**
+ * @function logout
+ * @description Logs out the current user and stops the session.
+ * 
+ * @param {Object} req 
+ * @param {Object} res 
+ */
+const logout = async (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({ message: "Logout failed" });
+        }
+        res.clearCookie(SESSION_NAME);
+        res.status(200).json({ message: "Logout successful" });
+    });
+}
+
+/**
+ * @function getMe
+ * @description Retrieves the currently authenticated user's information.
+ * 
+ * @param {Object} req 
+ * @param {Object} res 
+ * 
+ * Modified from Claude Sonnet 4.6 snippet.
+ */
+const getMe = async (req, res) => {
+    try {
+        const user = await User.findById(req.session.user.id);
+    } catch (err) {
+        return res.status(500).json({ message: "Server error: " + err.message });
+    }
+    res.status(200).json({
+        username: user.username,
+        email: user.email,
+        createdAt: user.createdAt
+    });
+}
 
 module.exports = {
     register,
     login,
     logout,
-    me
+    getMe
 };
