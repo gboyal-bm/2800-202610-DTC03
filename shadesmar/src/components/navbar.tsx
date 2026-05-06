@@ -1,5 +1,17 @@
+/**
+ * @fileoverview Navbar component for the Shadesmar application.
+ * @module components/navbar
+ * @description This component renders a navigation bar with links to the Home, Explore, and Profile pages. It uses Tailwind CSS for styling and React Router's Link component for navigation.
+ * @exports Navbar
+ * @author Harlan Bullock
+ */
+
 import { Link } from "react-router-dom";
 
+/**
+ * @function Navbar
+ * @description A simple navigation bar component for the Shadesmar application.
+ */
 export default function Navbar() {
   return (
     <nav className="w-full bg-[#5eccf3] px-6 py-4 shadow-md">
@@ -23,7 +35,7 @@ export default function Navbar() {
             <Link to="/profile" className="hover:text-slate-100">
               Profile
             </Link>
-          </li>
+          </li> 
         </ul>
       </div>
     </nav>
