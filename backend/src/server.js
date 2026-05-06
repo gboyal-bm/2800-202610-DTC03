@@ -45,19 +45,6 @@ if (typeof require !== 'undefined' && require.main === module) {
 
 main();
 
-// Middleware
-function authenticate(req, res, next) {
-    console.log("Attempting authentication");
-    console.log("Session:", req.session);
-    console.log("User:", req.session.user);
-
-    if (!(req.session && req.session.user)) {
-        res.redirect("login.html");
-        return;
-    }
-    next();
-}
-
 function main() {
     // Setup
     app.use(sessionConfig);
