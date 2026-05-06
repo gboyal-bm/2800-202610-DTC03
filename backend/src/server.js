@@ -31,7 +31,7 @@ const authRoutes = require("./routes/auth.js");
 // Start server
 
 if (typeof require !== 'undefined' && require.main === module) {
-   main();
+    main();
 }
 
 // Constants
@@ -41,9 +41,9 @@ if (typeof require !== 'undefined' && require.main === module) {
 // Values
 
 
-// Schemas
-
-main();
+if (require.main === module) {
+    main();
+}
 
 function main() {
     // Setup
