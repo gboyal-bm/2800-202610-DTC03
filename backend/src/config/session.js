@@ -9,7 +9,7 @@
 const session = require("express-session")
 
 // Constants
-const { SESSION_NAME } = require("../constants.js");
+const { SESSION_NAME } = require("../constants");
 
 const SESSION_CONFIG = {
     name: SESSION_NAME,

@@ -23,10 +23,10 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 
 // Internal modules
-const sessionConfig = require("./config/session.js");
+const sessionConfig = require("./config/session");
 
 // Routes
-const authRoutes = require("./routes/auth.js");
+const authRoutes = require("./routes/auth");
 
 // Start server
 

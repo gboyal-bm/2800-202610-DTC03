@@ -19,7 +19,7 @@ const {
     login,
     logout,
     me
-} = require("../controllers/authController.js");
+} = require("../controllers/auth");
 
 // Routes
 
