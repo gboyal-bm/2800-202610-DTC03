@@ -7,7 +7,7 @@ const toursDictionary: Record<string, () => void> = {
 	"/profile": profileTour,
 };
 
-export default function Navbar() {
+export function Navbar() {
 	const location = useLocation();
 
 	const handleTour = () => {
