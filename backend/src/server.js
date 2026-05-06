@@ -1,7 +1,8 @@
-//
-// Alex Lu
-// Partially from COMP2537 Pokemon Assignment
-//
+/**
+ * @fileoverview Shadesmar API server entrypoint
+ * 
+ * 
+ */
 
 // Main setup
 const express = require("express");
@@ -11,11 +12,21 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT || 3001;
 const SESSION_KEY = process.env.SESSION_KEY;
+const MONGO_USER = process.env.MONGO_USER;
+const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 
 // Imports
 const mongoose = require("mongoose");
 const session = require("express-session");
 const bcrypt = require("bcrypt");
+
+const accounts = require("/accounts.js");
+
+// Start server
+
+if (typeof require !== 'undefined' && require.main === module) {
+   main();
+}
 
 // Constants
 // - Values
