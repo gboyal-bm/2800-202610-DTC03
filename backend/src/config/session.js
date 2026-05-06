@@ -11,12 +11,10 @@ const session = require("express-session")
 // Constants
 const { SESSION_NAME } = require("../constants");
 
-const SESSION_CONFIG = {
+module.exports = session({
     name: SESSION_NAME,
-    secret: process.env.SESSION_KEY,
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
     cookie: { secure: process.env.NODE_ENV === "production" }
-}
-
-module.exports = session(SESSION_CONFIG);
+});

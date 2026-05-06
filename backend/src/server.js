@@ -6,13 +6,13 @@
  */
 
 // Main setup
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 
 // ENV variables
-require("dotenv").config();
 const PORT = process.env.PORT || 3001;
-const SESSION_KEY = process.env.SESSION_KEY;
 const MONGO_USER = process.env.MONGO_USER;
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 
@@ -30,17 +30,6 @@ const authRoutes = require("./routes/auth");
 
 // Start server
 
-if (typeof require !== 'undefined' && require.main === module) {
-    main();
-}
-
-// Constants
-// - Values
-// - Schemas
-
-// Values
-
-
 if (require.main === module) {
     main();
 }
@@ -50,7 +39,7 @@ function main() {
     app.use(sessionConfig);
 
     // Start
-    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json());
 
     // User Login
     app.use("/api/auth", authRoutes);

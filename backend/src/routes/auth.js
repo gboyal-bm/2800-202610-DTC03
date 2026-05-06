@@ -13,12 +13,14 @@ const router = express.Router();
 
 // Internal modules
 
+const authMiddleware = require("../middleware/auth");
+
 // Controllers
 const {
     register,
     login,
     logout,
-    me
+    getMe
 } = require("../controllers/auth");
 
 // Routes
@@ -30,6 +32,6 @@ router.post("/login", login);
 // Protected routes
 router.use(authMiddleware.authenticate);
 router.post("/logout", logout);
-router.get("/me", me);
+router.get("/me", getMe);
 
 module.exports = router;
