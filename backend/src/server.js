@@ -24,6 +24,7 @@ const session = require("express-session");
 
 // Internal modules
 const sessionConfig = require("./config/session");
+const { connectDB } = require("./utils/database");
 
 // Routes
 const authRoutes = require("./routes/auth");
@@ -34,7 +35,15 @@ if (require.main === module) {
     main();
 }
 
-function main() {
+async function main() {
+    // Connect to database
+    const dbConnected = await connectDB();
+    if (!dbConnected) {
+        return console.log("Failed to connect to database");
+    } else {
+        console.log("Connected to database");
+    }
+
     // Setup
     app.use(sessionConfig);
 

@@ -69,11 +69,12 @@ const userSchema = new mongoose.Schema({
  * @param {Function} next - The callback to the next middleware
  * @returns {Promise<void>}
  */
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
+    console.log("Pass: ", this.password);
+    
     if (this.isModified("password")) {
         this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
     }
-    next();
 });
 
 /**
@@ -85,6 +86,7 @@ userSchema.pre("save", async function (next) {
  *                                     true if correct 
  */
 userSchema.methods.comparePassword = async function (passwordAttempt) {
+    console.log(this);
     return await bcrypt.compare(passwordAttempt, this.password);
 };
 
