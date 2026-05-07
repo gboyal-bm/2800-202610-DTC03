@@ -16,7 +16,7 @@ export function Map() {
 			<section className="mx-auto max-w-6xl">
 				<div className="mb-6">
 					<h1 id="Map" className="text-3xl font-bold text-slate-800">
-						Map
+						Shade Map
 					</h1>
 					<p className="mt-2 text-slate-600">
 						Explore nearby locations, routes, and points of interest.
@@ -39,7 +39,7 @@ export function Map() {
 								−
 							</button>
 						</div>
-						
+
 					</div>
 
 					<aside className="rounded-2xl bg-white p-5 shadow-lg">
@@ -49,17 +49,17 @@ export function Map() {
 
 						<div className="mt-4 space-y-3">
 							<div className="rounded-xl border border-slate-200 p-3">
-								<p className="font-medium text-slate-800">Forest Trail</p>
+								<p className="font-medium text-slate-800">Location One</p>
 								<p className="text-sm text-slate-500">2.1 km away</p>
 							</div>
 
 							<div className="rounded-xl border border-slate-200 p-3">
-								<p className="font-medium text-slate-800">Community Garden</p>
+								<p className="font-medium text-slate-800">Location Two</p>
 								<p className="text-sm text-slate-500">3.4 km away</p>
 							</div>
 
 							<div className="rounded-xl border border-slate-200 p-3">
-								<p className="font-medium text-slate-800">River Walk</p>
+								<p className="font-medium text-slate-800">Location Three</p>
 								<p className="text-sm text-slate-500">4.8 km away</p>
 							</div>
 						</div>
