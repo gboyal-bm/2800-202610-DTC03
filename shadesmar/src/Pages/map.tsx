@@ -26,9 +26,20 @@ export function Map() {
 				<div className="grid gap-6 lg:grid-cols-[1fr_300px]">
 					<div className="relative min-h-[500px] overflow-hidden rounded-2xl bg-sky-100 shadow-lg">
 						{/* Placeholder for the map */}
+						
 						<div className="absolute inset-0 flex items-center justify-center">
 							<p className="text-lg font-medium text-slate-500">	Map Placeholder	</p>
 						</div>
+
+						<div className="absolute bottom-6 right-6 flex gap-2">
+							<button className="rounded-lg bg-white px-3 py-2 text-lg font-bold text-slate-700 shadow hover:bg-slate-50">
+								+
+							</button>
+							<button className="rounded-lg bg-white px-3 py-2 text-lg font-bold text-slate-700 shadow hover:bg-slate-50">
+								−
+							</button>
+						</div>
+						
 					</div>
 
 					<aside className="rounded-2xl bg-white p-5 shadow-lg">
