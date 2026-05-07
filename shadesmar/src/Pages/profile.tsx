@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+//import { profileTour } from "../Components/tours"; disabled for ease of developement
+
 export function Profile() {
 	const user = {
 		name: "Name",
@@ -7,11 +10,20 @@ export function Profile() {
 		level: "1",
 	};
 
+	useEffect(() => {
+		const hasSeenTour = localStorage.getItem("profile_tour_seen");
+
+		if (!hasSeenTour) {
+			//profileTour(); disabled for ease of developement
+			localStorage.setItem("profile_tour_seen", "true");
+		}
+	}, []);
+
 	return (
 		<div className="min-h-screen flex flex-col bg-gray-50 text-gray-900">
 			{/* Profile Header / Identity */}
 			<header className="flex-1 flex items-center justify-center px-6 py-20">
-				<div className="text-center max-w-2xl w-full">
+				<div id="UserDetails" className="text-center max-w-2xl w-full">
 					{/* Profile Image Placeholder */}
 					<div className="w-32 h-32 bg-white border-2 border-dashed border-gray-300 rounded-full mx-auto mb-8 flex items-center justify-center text-3xl">
 						Icon
@@ -26,7 +38,7 @@ export function Profile() {
 
 					<p className="text-lg mb-10">{user.bio}</p>
 
-					<div className="flex justify-center gap-4">
+					<div id="Controls" className="flex justify-center gap-4">
 						<button className="px-6 py-3 rounded-lg font-medium bg-a4 transition hover:opacity-90">
 							Edit Profile
 						</button>
@@ -44,7 +56,7 @@ export function Profile() {
 						Account Information
 					</h3>
 
-					<div className="grid gap-6 md:grid-cols-2">
+					<div id="AccountInformation" className="grid gap-6 md:grid-cols-2">
 						{/* Email Card */}
 						<div className="p-6 bg-white border rounded-xl hover:shadow-md transition">
 							<p className="text-xs font-bold tracking-wider text-gray-400 mb-1">
