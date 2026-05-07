@@ -77,7 +77,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     const { email, password, rememberMe } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password");
     if (!user) {
         return res.status(401).json({ message: "Invalid email or password" });
     }
@@ -118,8 +118,9 @@ const logout = async (req, res) => {
  * Modified from Claude Sonnet 4.6 snippet.
  */
 const getMe = async (req, res) => {
+    let user = undefined;
     try {
-        const user = await User.findById(req.session.user.id);
+         user = await User.findById(req.session.user.id);
     } catch (err) {
         return res.status(500).json({ message: "Server error: " + err.message });
     }
