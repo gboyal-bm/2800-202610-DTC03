@@ -35,7 +35,7 @@ export function Auth({ mode }: AuthModes) {
             });
             console.log("Authentication result:", result);
             if (result.status === 200) {
-                navigate("/exploration");
+                navigate("/home");
             }
         } catch (err) {
             console.error("Authentication error:", err);
