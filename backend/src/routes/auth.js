@@ -26,7 +26,7 @@ const {
 // Routes
 
 // Authentication
-router.post("/register", register);
+router.post("/register", authMiddleware.validateNewUser, register);
 router.post("/login", login);
 
 // Protected routes

@@ -66,12 +66,9 @@ const userSchema = new mongoose.Schema({
  * 
  * @function
  * @description Hash the password.
- * @param {Function} next - The callback to the next middleware
  * @returns {Promise<void>}
  */
 userSchema.pre("save", async function () {
-    console.log("Pass: ", this.password);
-    
     if (this.isModified("password")) {
         this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
     }
