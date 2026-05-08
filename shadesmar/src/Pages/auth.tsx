@@ -11,19 +11,19 @@ interface AuthModes {
 export function Auth({ mode }: AuthModes) {
     const navigate = useNavigate();
     const [form, setForm] = useState({
-        username: '',
-        email: '',
-        password: '',
+        username: "",
+        email: "",
+        password: "",
         rememberMe: true,
     });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, type, checked } = event.target;
-        setForm(prevForm => ({
+        setForm((prevForm) => ({
             ...prevForm,
-            [name]: type === 'checkbox' ? checked : value,
+            [name]: type === "checkbox" ? checked : value,
         }));
-    }
+    };
 
     const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -35,7 +35,7 @@ export function Auth({ mode }: AuthModes) {
             });
             console.log("Authentication result:", result);
             if (result.status === 200) {
-                navigate("/home");
+                navigate("/exploration");
             }
         } catch (err) {
             console.error("Authentication error:", err);
@@ -50,9 +50,6 @@ export function Auth({ mode }: AuthModes) {
             <div className="border-2 flex flex-col justify-center p-8 rounded-xl gap-16 bg-slate-200">
                 <div className="w-full flex flex-row gap-8">
                     <div className="flex flex-col gap-8">
-                        <label className="flex text-lg flex-1 items-center font-semibold">
-                            Email:
-                        </label>
                         {mode === "register" && (
                             <>
                                 <label className="flex text-lg flex-1 items-center font-semibold">
@@ -61,10 +58,16 @@ export function Auth({ mode }: AuthModes) {
                             </>
                         )}
                         <label className="flex text-lg flex-1 items-center font-semibold">
+                            Email:
+                        </label>
+                        <label className="flex text-lg flex-1 items-center font-semibold">
                             Password:
                         </label>
                     </div>
-                    <form className="flex flex-1 flex-col gap-8" onSubmit={handleSubmit}>
+                    <form
+                        className="flex flex-1 flex-col gap-8"
+                        onSubmit={handleSubmit}
+                    >
                         {mode === "register" && (
                             <>
                                 <input
@@ -90,7 +93,6 @@ export function Auth({ mode }: AuthModes) {
                             placeholder="Password"
                             onChange={handleChange}
                         />
-                        <input type="submit" value={mode === "login" ? "Log In" : "Register"} />
                     </form>
                 </div>
                 <div className="flex flex-1 flex-col gap-4">
@@ -102,20 +104,26 @@ export function Auth({ mode }: AuthModes) {
                     {mode == "login" ? (
                         <>
                             No account?{" "}
-                            <Link to="/register" className="underline text-blue-800">
+                            <Link
+                                to="/register"
+                                className="underline text-blue-800"
+                            >
                                 Sign up
                             </Link>
                         </>
                     ) : (
                         <>
                             Already have an account?{" "}
-                            <Link to="/login" className="underline text-blue-800">
+                            <Link
+                                to="/login"
+                                className="underline text-blue-800"
+                            >
                                 Log in
                             </Link>
                         </>
                     )}
                 </p>
             </div>
-        </main >
+        </main>
     );
 }
