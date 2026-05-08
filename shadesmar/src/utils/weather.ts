@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Functions for interacting with the weather API
+ * @module utils/weather
+ * 
+ * @description Provides functions to interact with the OpenWeather API to get 
+ *              weather and heat data.
+ */
+
 import dotenv from "dotenv";
 dotenv.config();
 
