@@ -2,70 +2,68 @@ import { useEffect } from "react";
 // import { mapTour } from "../Components/tours"; disabled for ease of development
 
 export function Map() {
-	useEffect(() => {
-		const hasSeenTour = localStorage.getItem("map_tour_seen");
+  useEffect(() => {
+    const hasSeenTour = localStorage.getItem("map_tour_seen");
 
-		if (!hasSeenTour) {
-			// mapTour(); disabled for ease of development
-			localStorage.setItem("map_tour_seen", "true");
-		}
-	}, []);
+    if (!hasSeenTour) {
+      //mapTour(); disabled for ease of developement
+      localStorage.setItem("map_tour_seen", "true");
+    }
+  }, []);
 
-	return (
-		<main className="min-h-screen bg-slate-100 p-6">
-			<section className="mx-auto max-w-6xl">
-				<div className="mb-6">
-					<h1 id="Map" className="text-3xl font-bold text-slate-800">
-						Shade Map
-					</h1>
-					<p className="mt-2 text-slate-600">
-						Explore nearby locations, routes, and points of interest.
-					</p>
-				</div>
+  return (
+    <div className="min-h-screen bg-gray-50 px-6 py-12">
+      <div className="mx-auto max-w-6xl">
+        {/* Page Header */}
+        <header className="mb-12 text-center">
+          <h1 id="Map" className="text-4xl font-bold text-gray-900">
+            Explore the Map
+          </h1>
+          <p className="mt-4 text-gray-600">
+            Find activities and points of interest near you
+          </p>
+        </header>
 
-				<div className="grid gap-6 lg:grid-cols-[1fr_300px]">
-					<div className="relative min-h-[500px] overflow-hidden rounded-2xl bg-sky-100 shadow-lg">
-						{/* Placeholder for the map */}
-						
-						<div className="absolute inset-0 flex items-center justify-center">
-							<p className="text-lg font-medium text-slate-500">	Map Placeholder	</p>
-						</div>
+        {/* Map Embed */}
+        <section className="mb-12">
+          <div className="overflow-hidden rounded-xl border border-gray-200 shadow-md bg-white">
+            <iframe
+              src="https://www.google.com/maps/d/u/0/embed?mid=1VnIL5tEG9LK9GiBSjlk1QYxYyYtRjJ0&ehbc=2E312F&noprof=1"
+              width="100%"
+              height="480"
+              style={{ border: 0, display: "block" }}
+              allowFullScreen
+              loading="lazy"
+              title="Shadesmar Activity Map"
+            />
+          </div>
+        </section>
 
-						<div className="absolute bottom-6 right-6 flex gap-2">
-							<button className="rounded-lg bg-white px-3 py-2 text-lg font-bold text-slate-700 shadow hover:bg-slate-50">
-								+
-							</button>
-							<button className="rounded-lg bg-white px-3 py-2 text-lg font-bold text-slate-700 shadow hover:bg-slate-50">
-								−
-							</button>
-						</div>
+        {/* Info Cards Below the Map */}
+        <section className="py-8 bg-a2 rounded-xl px-6">
+          <h3 className="text-2xl font-bold mb-8 text-center">
+            Map Highlights
+          </h3>
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="p-6 border rounded-lg bg-white hover:shadow-md transition">
+              Highlight 1
+            </div>
+            <div className="p-6 border rounded-lg bg-white hover:shadow-md transition">
+              Highlight 2
+            </div>
+            <div className="p-6 border rounded-lg bg-white hover:shadow-md transition">
+              Highlight 3
+            </div>
+          </div>
+        </section>
+      </div>
 
-					</div>
-
-					<aside className="rounded-2xl bg-white p-5 shadow-lg">
-						<h2 className="text-xl font-semibold text-slate-800">
-							Nearby Areas
-						</h2>
-
-						<div className="mt-4 space-y-3">
-							<div className="rounded-xl border border-slate-200 p-3">
-								<p className="font-medium text-slate-800">Location One</p>
-								<p className="text-sm text-slate-500">2.1 km away</p>
-							</div>
-
-							<div className="rounded-xl border border-slate-200 p-3">
-								<p className="font-medium text-slate-800">Location Two</p>
-								<p className="text-sm text-slate-500">3.4 km away</p>
-							</div>
-
-							<div className="rounded-xl border border-slate-200 p-3">
-								<p className="font-medium text-slate-800">Location Three</p>
-								<p className="text-sm text-slate-500">4.8 km away</p>
-							</div>
-						</div>
-					</aside>
-				</div>
-			</section>
-		</main>
-	);
+      {/* Footer */}
+      <footer className="mt-16 border-t bg-gray-50">
+        <div className="max-w-6xl mx-auto px-6 py-6 text-center text-sm text-gray-500">
+          © Footer Stuff
+        </div>
+      </footer>
+    </div>
+  );
 }
