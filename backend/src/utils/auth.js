@@ -23,7 +23,7 @@ const startSession = (req, user, rememberMe) => {
         : null;
 };
 
-const validateNewUser = async (errorMessages, email, username, password) => {
+const validateNewUserFields = async (errorMessages, email, username, password) => {
     if (email.trim().length === 0) {
         errorMessages.push("Email cannot be empty.");
     }
@@ -41,5 +41,5 @@ const validateNewUser = async (errorMessages, email, username, password) => {
 
 module.exports = {
     startSession,
-    validateNewUser
+    validateNewUserFields
 };

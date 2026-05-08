@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-//import { mapTour } from "../Components/tours"; disabled for ease of developement
+// import { mapTour } from "../Components/tours"; disabled for ease of development
 
 export function Map() {
   useEffect(() => {
