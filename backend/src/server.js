@@ -1,7 +1,7 @@
 /**
  * @fileoverview Shadesmar API server entrypoint
  * @module server
- * 
+ *
  * @description Initializes and starts the Shadesmar API server.
  */
 
@@ -13,18 +13,17 @@ const app = express();
 
 // ENV variables
 const PORT = process.env.PORT || 3001;
-const MONGO_USER = process.env.MONGO_USER;
-const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 
 // Imports
 
-// External modules 
+// External modules
 const mongoose = require("mongoose");
 const session = require("express-session");
 
 // Internal modules
 const sessionConfig = require("./config/session");
-const { connectDB } = require("./utils/database");
+const helmetConfig = require("./config/helmet");
+const {connectDB} = require("./utils/database");
 
 // Routes
 const authRoutes = require("./routes/auth");
@@ -35,6 +34,10 @@ if (require.main === module) {
     main();
 }
 
+/**
+ * @function main
+ * @description Drives the program.
+ */
 async function main() {
     // Connect to database
     const dbConnected = await connectDB();
@@ -45,6 +48,20 @@ async function main() {
     }
 
     // Setup
+    app.use(helmetConfig);
+    // app.use(
+    //     helmet({
+    //         contentSecurityPolicy: {
+    //             directives: {
+    //                 defaultSrc: ["'self'"],
+    //                 connectSrc: ["'self'"],
+    //                 scriptSrc: ["'self'"],
+    //                 styleSrc: ["'self'"],
+    //                 imgSrc: ["'self'"],
+    //             },
+    //         },
+    //     })
+    // );
     app.use(sessionConfig);
 
     // Start
@@ -63,4 +80,3 @@ async function main() {
         console.log(`Server running on http://localhost:${PORT}`);
     });
 }
-

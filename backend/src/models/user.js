@@ -14,9 +14,9 @@ const bcrypt = require("bcrypt");
 const { SALT_ROUNDS, PASSWORD_MIN_LENGTH, VALID_EMAIL_REGEX } = require("../constants");
 
 /**
+ * @typedef {Object} User
  * @description User account.
  * 
- * @typedef {Object} User
  * @property {string} username - The user's public username
  * @property {string} email - The user's email address
  * @property {string} password - The user's encrypted password
@@ -66,12 +66,9 @@ const userSchema = new mongoose.Schema({
  * 
  * @function
  * @description Hash the password.
- * @param {Function} next - The callback to the next middleware
  * @returns {Promise<void>}
  */
 userSchema.pre("save", async function () {
-    console.log("Pass: ", this.password);
-    
     if (this.isModified("password")) {
         this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
     }
