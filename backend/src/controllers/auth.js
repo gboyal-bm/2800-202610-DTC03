@@ -64,7 +64,7 @@ const register = async (req, res) => {
 
     // Success
     startSession(req, newUser, rememberMe);
-    res.status(201).redirect("/home");
+    res.status(201).json({ message: "Registration successful" });
 };
 
 /**
