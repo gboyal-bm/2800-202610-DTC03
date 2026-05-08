@@ -1,7 +1,15 @@
-export function Auth() {
+type AuthMode = "login" | "register";
+
+interface AuthModes {
+    mode: AuthMode;
+}
+
+export function Auth({ mode }: AuthModes) {
     return (
         <main className="max-w-2xl mx-auto my-6 mb-28">
-            <h1 className="text-5xl py-12 font-bold">Login</h1>
+            <h1 className="text-5xl py-12 font-bold">
+                {mode == "login" ? "Log In" : "Register"}
+            </h1>
             <div className="border-2 flex flex-col justify-center p-8 rounded-xl gap-16 bg-slate-200">
                 <div className="w-full flex flex-row gap-8">
                     <div className="flex flex-col gap-8">
@@ -25,9 +33,34 @@ export function Auth() {
                         />
                     </div>
                 </div>
-                <button className="border py-4 rounded-lg text-lg font-bold bg-white">
-                    Log In
-                </button>
+                <div className="flex flex-1 flex-col gap-4">
+                    <button className="border py-4 rounded-lg text-lg font-bold bg-white">
+                        Log In
+                    </button>
+                    <p>
+                        {mode == "login" ? (
+                            <>
+                                No account?{" "}
+                                <a
+                                    href="/register"
+                                    className="underline text-blue-800"
+                                >
+                                    Sign up
+                                </a>
+                            </>
+                        ) : (
+                            <>
+                                Already have an account?{" "}
+                                <a
+                                    href="/login"
+                                    className="underline text-blue-800"
+                                >
+                                    Log in
+                                </a>
+                            </>
+                        )}
+                    </p>
+                </div>
             </div>
         </main>
     );
