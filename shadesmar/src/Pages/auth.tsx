@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 type AuthMode = "login" | "register";
 
 interface AuthModes {
@@ -41,22 +42,16 @@ export function Auth({ mode }: AuthModes) {
                         {mode == "login" ? (
                             <>
                                 No account?{" "}
-                                <a
-                                    href="/register"
-                                    className="underline text-blue-800"
-                                >
+                                <Link to="/register" className="underline text-blue-800">
                                     Sign up
-                                </a>
+                                </Link>
                             </>
                         ) : (
                             <>
                                 Already have an account?{" "}
-                                <a
-                                    href="/login"
-                                    className="underline text-blue-800"
-                                >
+                                <Link to="/login" className="underline text-blue-800">
                                     Log in
-                                </a>
+                                </Link>
                             </>
                         )}
                     </p>
