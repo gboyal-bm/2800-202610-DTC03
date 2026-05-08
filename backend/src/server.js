@@ -35,6 +35,10 @@ if (require.main === module) {
     main();
 }
 
+/**
+ * @function main
+ * @description Drives the program.
+ */
 async function main() {
     // Connect to database
     const dbConnected = await connectDB();
