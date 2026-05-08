@@ -13,15 +13,12 @@ const app = express();
 
 // ENV variables
 const PORT = process.env.PORT || 3001;
-const MONGO_USER = process.env.MONGO_USER;
-const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 
 // Imports
 
 // External modules
 const mongoose = require("mongoose");
 const session = require("express-session");
-// const helmet = require("helmet");
 
 // Internal modules
 const sessionConfig = require("./config/session");
