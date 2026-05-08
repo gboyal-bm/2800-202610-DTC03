@@ -47,9 +47,15 @@ export function Auth({ mode }: AuthModes) {
             <h1 className="text-5xl py-12 font-bold">
                 {mode == "login" ? "Log In" : "Register"}
             </h1>
-            <div className="border-2 flex flex-col justify-center p-8 rounded-xl gap-16 bg-slate-200">
-                <div className="w-full flex flex-row gap-8">
+            <div className="border-2 flex flex-col justify-center p-8 rounded-xl gap-8 bg-slate-200">
+                <form
+                    className="w-full flex flex-row gap-8"
+                    onSubmit={handleSubmit}
+                >
                     <div className="flex flex-col gap-8">
+                        <label className="flex text-lg flex-1 items-center font-semibold">
+                            Email:
+                        </label>
                         {mode === "register" && (
                             <>
                                 <label className="flex text-lg flex-1 items-center font-semibold">
@@ -58,16 +64,10 @@ export function Auth({ mode }: AuthModes) {
                             </>
                         )}
                         <label className="flex text-lg flex-1 items-center font-semibold">
-                            Email:
-                        </label>
-                        <label className="flex text-lg flex-1 items-center font-semibold">
                             Password:
                         </label>
                     </div>
-                    <form
-                        className="flex flex-1 flex-col gap-8"
-                        onSubmit={handleSubmit}
-                    >
+                    <div className="flex flex-1 flex-col gap-8">
                         {mode === "register" && (
                             <>
                                 <input
@@ -93,8 +93,8 @@ export function Auth({ mode }: AuthModes) {
                             placeholder="Password"
                             onChange={handleChange}
                         />
-                    </form>
-                </div>
+                    </div>
+                </form>
                 <div className="flex flex-1 flex-col gap-4">
                     <button className="border py-4 rounded-lg text-lg font-bold bg-white">
                         {mode === "login" ? "Log In" : "Register"}
