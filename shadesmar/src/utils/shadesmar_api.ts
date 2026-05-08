@@ -29,7 +29,7 @@ type ApiResponse = {
  * @param {Object} options  - Additional options to pass into the request, including the method and body
  * @returns {Promise<ApiResponse>} - The formatted JSON response
  */
-async function apiFetch(endpoint: string, options: Object = {}) {
+async function apiFetch(endpoint: string, options: Object = {}, noRedirect: boolean = false): Promise<ApiResponse> {
     let result: Object | null = null;
     let status: number | null = null;
     try {
@@ -49,8 +49,8 @@ async function apiFetch(endpoint: string, options: Object = {}) {
         status = 500;
     } finally {
         // Unauthorized requests redirect to login
-        if (status == 401) {
-            window.location.href = "/login";
+        if (status == 401 && !noRedirect) {
+            window.location.replace("/login");
         }
         const apiResponse: ApiResponse = { status, result };
         return apiResponse;
@@ -66,7 +66,7 @@ async function apiFetch(endpoint: string, options: Object = {}) {
 async function getUser() {
     let user: Object | null = null;
     try {
-        const response = await apiFetch("/auth/me");
+        const response = await apiFetch("/auth/me", {}, true);
         if (response.status === 200) {
             user = response.result;
         }

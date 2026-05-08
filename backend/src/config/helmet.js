@@ -14,7 +14,7 @@ module.exports = helmet({
             defaultSrc: ["'self'"],
             connectSrc: ["'self'"],
             scriptSrc: ["'self'"],
-            styleSrc: ["'self'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
             imgSrc: ["'self'"]
         },
     },
