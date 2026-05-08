@@ -95,12 +95,15 @@ export function Tips() {
                             showing symptons of serious illness.
                         </p>
                     </div>
-                    <button className="px-6 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-200 transition-colors">
-                        <a href="https://tc.canada.ca/en/dangerous-goods/canutec/reporting-requirements/guide-reporting-dangerous-goods-incidents/emergency-phone-numbers">
-                            Emergency Contacts
-                        </a>
-                        <p>(Canada)</p>
-                    </button>
+                    <a
+                        href="https://tc.canada.ca/en/dangerous-goods/canutec/reporting-requirements/guide-reporting-dangerous-goods-incidents/emergency-phone-numbers"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex flex-col items-center px-6 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-200 transition-colors text-center"
+                    >
+                        <span>Emergency Contacts</span>
+                        <span className="text-sm font-normal">(Canada)</span>
+                    </a>
                 </div>
             </div>
         </div>

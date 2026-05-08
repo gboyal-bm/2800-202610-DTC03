@@ -27,12 +27,17 @@ export function Navbar() {
                 <ul className="flex gap-6 text-gray-900 font-medium">
                     <li>
                         {toursDictionary[location.pathname] && (
-                            <button id="TourButton" onClick={handleTour}>
+                            <button
+                                id="TourButton"
+                                className="px-2 py-1 rounded-2xl bg-blue-300 hover:bg-slate-500"
+                                onClick={handleTour}
+                            >
                                 <img
                                     src={tourIcon}
                                     alt="Tour Icon"
                                     width="25"
                                     height="25"
+                                    className=""
                                 ></img>
                             </button>
                         )}
