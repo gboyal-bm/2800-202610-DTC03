@@ -1,12 +1,12 @@
 /**
  * @fileoverview Utilities for interacting with the Shadesmar API
  * @module utils/shadesmar_api
- * 
+ *
  * @description Provides functions to interact with the Shadesmar API, abstracting the process
  *              of fetching data and automatic redirects.
  * @exports apiFetch
  * @exports getUser
- * 
+ *
  * @author Alex Lu
  */
 
@@ -17,31 +17,34 @@
  * @property {Object | null} result - The JSON response body, or null if there was an error
  */
 type ApiResponse = {
-    status: number | null,
-    result: Object | null
-}
+    status: number | null;
+    result: Object | null;
+};
 
 /**
  * @function apiFetch
  * @description Wraps fetch to add custom handling of statuses in requests.
- * 
+ *
  * @param {string} endpoint - The API endpoint path, such as "/auth/me"
  * @param {Object} options  - Additional options to pass into the request, including the method and body
  * @returns {Promise<ApiResponse>} - The formatted JSON response
  */
-async function apiFetch(endpoint: string, options: Object = {}, noRedirect: boolean = false): Promise<ApiResponse> {
+async function apiFetch(
+    endpoint: string,
+    options: Object = {},
+    noRedirect: boolean = false
+): Promise<ApiResponse> {
     let result: Object | null = null;
     let status: number | null = null;
     try {
-        const response = await fetch(
-            `/api${endpoint}`,
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                ...options
-            }
-        );
+        const response = await fetch(`/api${endpoint}`, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            // Required so the browser sends and stores session cookies
+            credentials: "include",
+            ...options,
+        });
         status = response.status;
         result = await response.json();
     } catch (err) {
@@ -60,7 +63,7 @@ async function apiFetch(endpoint: string, options: Object = {}, noRedirect: bool
 /**
  * @function getUser
  * @description Fetches the currently logged in user's information.
- * 
+ *
  * @returns {Promise<Object>} - The formatted JSON response, or null if no user is logged in
  */
 async function getUser() {
@@ -77,8 +80,7 @@ async function getUser() {
     }
 }
 
-
 export const ShadesmarApi = {
     apiFetch,
-    getUser
-}
+    getUser,
+};
