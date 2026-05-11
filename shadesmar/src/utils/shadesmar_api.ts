@@ -15,11 +15,24 @@
  * @description The formatted JSON response.
  * @property {number | null} status - The HTTP status code, or null if there was an error
  * @property {Object | null} result - The JSON response body, or null if there was an error
+ * @property {boolean} ok - Whether the response status is in the range 200-299
  */
 type ApiResponse = {
     status: number | null;
     result: Object | null;
+    ok: boolean;
 };
+
+/**
+ * @function responseOk
+ * @description Checks if a given HTTP status code is in the range 200-299, indicating a successful response.
+ * 
+ * @param {number} status - The HTTP status code to check
+ * @returns {boolean} - Whether the status code represents a successful response
+ */
+function responseOk(status: number): boolean {
+    return status >= 200 && status < 300;
+}
 
 /**
  * @function apiFetch
@@ -55,7 +68,7 @@ async function apiFetch(
         if (status == 401 && !noRedirect) {
             window.location.replace("/login");
         }
-        const apiResponse: ApiResponse = { status, result };
+        const apiResponse: ApiResponse = { status, result, ok: responseOk(status as number) };
         return apiResponse;
     }
 }

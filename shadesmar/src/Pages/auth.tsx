@@ -38,10 +38,8 @@ export function Auth({ mode }: AuthModes) {
                 body: JSON.stringify(form),
             });
 
-            // Register returns 201, login returns 200
-            const successStatus = mode === "register" ? 201 : 200;
-
-            if (result.status === successStatus) {
+            // Status is 200 for login or 201 for registration
+            if (result.ok) {
                 // Sync the auth context with the now-active session
                 const user = await ShadesmarApi.getUser();
                 setUser(user);
