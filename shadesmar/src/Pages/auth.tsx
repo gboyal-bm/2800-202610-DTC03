@@ -36,7 +36,7 @@ export function Auth({ mode }: AuthModes) {
             const result = await ShadesmarApi.apiFetch(`/auth/${mode}`, {
                 method: "POST",
                 body: JSON.stringify(form),
-            });
+            }, true);
 
             // Status is 200 for login or 201 for registration
             if (result.ok) {
