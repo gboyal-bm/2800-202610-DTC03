@@ -129,6 +129,11 @@ export function Auth({ mode }: AuthModes) {
                     </div>
                 </div>
 
+                <div className="flex flex-row gap-2 items-center justify-baseline">
+                    <input className="size-5" type="checkbox" name="remember-me" id="remember-me"/>
+                    <label className="font-semibold">Remember Me</label>
+                </div>
+
                 <button
                     type="submit"
                     className="border py-4 rounded-lg text-lg font-bold bg-white hover:bg-slate-50 transition-colors"
