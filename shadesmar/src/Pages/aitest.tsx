@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { sendMessage } from "../utils/gemini";
+import { recommendActivities, sendMessage } from "../utils/gemini";
 
 export function AITest() {
     const [input, setInput] = useState("");
     const [response, setResponse] = useState("");
 
-    async function handleSubmit() {
+    async function submitMessage() {
         const result = await sendMessage(input);
+        setResponse(result ?? "No response");
+    }
+    
+    async function submitInfo() {
+        const result = await recommendActivities(input);
         setResponse(result ?? "No response");
     }
 
@@ -24,8 +29,11 @@ export function AITest() {
                     placeholder="Type prompt..."
                     className="p-4 border-2 rounded-lg w-full"
                 />
-                <button onClick={handleSubmit} className="bg-slate-200 text-lg p-2 border rounded-md">
-                    Submit
+                <button onClick={submitMessage} className="bg-slate-200 text-lg p-2 border rounded-md">
+                    Send Message
+                </button>
+                <button onClick={submitInfo} className="bg-slate-200 text-lg p-2 border rounded-md">
+                    Recommend Activity
                 </button>
             </div>
 
