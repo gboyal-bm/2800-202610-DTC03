@@ -23,11 +23,12 @@ const session = require("express-session");
 // Internal modules
 const sessionConfig = require("./config/session");
 const helmetConfig = require("./config/helmet");
-const { connectDB } = require("./utils/database");
+const {  connectDB  } = require("./utils/database");
 const { debugIncomingRequest } = require("./utils/debug");
 
 // Routes
 const authRoutes = require("./routes/auth");
+const aiRoutes = require("./routes/ai");
 
 // Start server
 
@@ -62,6 +63,9 @@ async function main() {
 
     // User Login
     app.use("/api/auth", authRoutes);
+
+    // AI
+    app.use("/api/ai", aiRoutes);
 
     // Protected routes
     app.get("/home", (req, res) => {
