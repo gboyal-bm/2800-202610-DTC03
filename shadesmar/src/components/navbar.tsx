@@ -1,6 +1,7 @@
 import {useLocation, Link} from "react-router-dom";
 import {homeTour, mapTour, profileTour} from "./tours";
 import tourIcon from "../assets/tour.svg";
+import logo from "../assets/shadesmar-logo-small.png";
 
 const toursDictionary: Record<string, () => void> = {
     "/": homeTour,
@@ -23,7 +24,10 @@ export function Navbar() {
     return (
         <nav className="w-full bg-a3 px-6 py-4 shadow-md">
             <div className="mx-auto flex max-w-6xl items-center justify-between">
-                <h1 className="text-xl font-bold text-gray-900">Shadesmar</h1>
+                <Link to="/" className="flex items-center gap-2">
+                    <img src={logo} alt="Shadesmar" className="h-10 w-10" />
+                    <span className="text-xl font-bold text-gray-900">Shadesmar</span>
+                </Link>
                 <ul className="flex gap-6 text-gray-900 font-medium">
                     <li>
                         {toursDictionary[location.pathname] && (
