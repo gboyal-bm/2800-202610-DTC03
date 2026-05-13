@@ -11,6 +11,7 @@ import { Tips } from "./Pages/tips";
 import { Footer } from "./components/footer";
 import { Auth } from "./Pages/auth";
 import { AITest } from "./Pages/aitest";
+import { NotFound } from "./Pages/notfound";
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                     <Route path="/exploration" element={<ProtectedRoute> <Exploration /> </ProtectedRoute>} />
                     <Route path="/map" element={<ProtectedRoute> <Map /> </ProtectedRoute>} />
                     <Route path="/profile" element={<ProtectedRoute> <Profile /> </ProtectedRoute>} />
+                    <Route path="*" element={<ProtectedRoute> <NotFound /> </ProtectedRoute>} />
                 </Routes>
             </AuthProvider>
             <Footer />
