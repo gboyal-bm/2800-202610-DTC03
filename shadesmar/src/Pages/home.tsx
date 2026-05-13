@@ -44,9 +44,11 @@ export function Home() {
                         Carousel Placeholder
                     </div>
 
-                    <button className="px-6 py-3 rounded-lg font-medium bg-a4 transition">
-                        View More
-                    </button>
+                    <Link to="/exploration">
+                        <button className="px-6 py-3 rounded-lg font-medium bg-a4 transition hover:opacity-90">
+                            Start Exploring
+                        </button>
+                    </Link>
                 </div>
             </header>
 
@@ -61,17 +63,21 @@ export function Home() {
                         id="FeaturesList"
                         className="grid gap-6 md:grid-cols-3 px-8"
                     >
-                        <Link to="/tips" className="hover:text-slate-100">
+                        <Link to="/tips">
                             <div className="p-6 border bg-a4 rounded-lg hover:shadow-md transition text-center tracking-wider text-xl font-bold">
-                                Summer Tips
+                                ☀️ Summer Tips
                             </div>
                         </Link>
-                        <div className="p-6 border rounded-lg hover:shadow-md transition">
-                            Feature 2
-                        </div>
-                        <div className="p-6 border rounded-lg hover:shadow-md transition">
-                            Feature 3
-                        </div>
+                        <Link to="/map">
+                            <div className="p-6 border rounded-lg hover:shadow-md transition text-center tracking-wider text-xl font-bold">
+                                🗺️ Shade Map
+                            </div>
+                        </Link>
+                        <Link to="/exploration">
+                            <div className="p-6 border rounded-lg hover:shadow-md transition text-center tracking-wider text-xl font-bold">
+                                🌿 Explore Activities
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </section>
