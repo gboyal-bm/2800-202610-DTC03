@@ -1,15 +1,28 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
+import { useAuth } from "../contexts/authContext";
+import { ShadesmarApi } from "../utils/shadesmar_api";
 //import { profileTour } from "../Components/tours"; disabled for ease of developement
 
+async function logout() {
+    try {
+        await ShadesmarApi.logoutUser();
+        window.location.replace("/login");
+    } catch (err) {
+        console.error("Logout error:", err);
+    }
+}
+
 export function Profile() {
-    const user = {
-        name: "Name",
-        email: "abc123@example.com",
+    const account = useAuth().user as any; // Type assertion to access username and email
+    const userInfo = {
+        name: account?.username || "Username",
+        email: account?.email || "abc123@example.com",
         bio: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam deserunt illo iure perspiciatis hic repellat.",
         location: "Vancouver, BC",
         level: "1",
     };
 
+    // Tour
     useEffect(() => {
         const hasSeenTour = localStorage.getItem("profile_tour_seen");
 
@@ -29,18 +42,18 @@ export function Profile() {
                         Icon
                     </div>
                     <div className="flex justify-center gap-4 ml-4">
-                        <h1 className="text-4xl font-bold mb-2">{user.name}</h1>
+                        <h1 className="text-4xl font-bold mb-2">{userInfo.name}</h1>
                         <div className="w-12 h-12 bg-white border-2 border-dashed border-gray-300 rounded-full flex items-center justify-center text-3xl">
                             <h1 className="text-4xl font-bold mb-1">
-                                {user.level}
+                                {userInfo.level}
                             </h1>
                         </div>
                     </div>
                     <p className="text-gray-500 mb-6 font-medium">
-                        {user.location}
+                        {userInfo.location}
                     </p>
 
-                    <p className="text-lg mb-10">{user.bio}</p>
+                    <p className="text-lg mb-10">{userInfo.bio}</p>
 
                     <div id="Controls" className="flex justify-center gap-4">
                         <button className="px-6 py-3 rounded-lg font-medium bg-a4 transition hover:opacity-90">
@@ -48,6 +61,10 @@ export function Profile() {
                         </button>
                         <button className="px-6 py-3 rounded-lg font-medium border border-gray-300 bg-white transition hover:bg-gray-50">
                             Settings
+                        </button>
+                        <button className="px-6 py-3 rounded-lg font-medium border border-gray-300 bg-a5 transition hover:opacity-90"
+                            onClick={logout}>
+                            Logout
                         </button>
                     </div>
                 </div>
@@ -69,7 +86,7 @@ export function Profile() {
                             <p className="text-xs font-bold tracking-wider text-gray-400 mb-1">
                                 EMAIL ADDRESS
                             </p>
-                            <p className="text-lg font-medium">{user.email}</p>
+                            <p className="text-lg font-medium">{userInfo.email}</p>
                         </div>
 
                         {/* Location Card */}
@@ -78,7 +95,7 @@ export function Profile() {
                                 CURRENT LOCATION
                             </p>
                             <p className="text-lg font-medium">
-                                {user.location}
+                                {userInfo.location}
                             </p>
                         </div>
 

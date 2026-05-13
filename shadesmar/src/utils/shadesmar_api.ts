@@ -77,13 +77,13 @@ async function apiFetch(
  * @function getUser
  * @description Fetches the currently logged in user's information.
  *
- * @returns {Promise<object>} - The formatted JSON response, or null if no user is logged in
+ * @returns {Promise<Object | null>} - The formatted JSON response, or null if no user is logged in
  */
-async function getUser() {
-    let user: object | null = null;
+async function getUser(): Promise<object | null> {
+    let user: Object | null = null;
     try {
         const response = await apiFetch("/auth/me", {}, true);
-        if (response.status === 200) {
+        if (response.ok) {
             user = response.result;
         }
     } catch (err) {
@@ -93,7 +93,28 @@ async function getUser() {
     }
 }
 
+/**
+ * @function logoutUser
+ * @description Logs out the currently logged in user.
+ *
+ * @returns {Promise<Object>} - The formatted JSON response, or null if no user is logged in
+ */
+async function logoutUser(): Promise<object | null> {
+    let response: ApiResponse | null = null;
+    try {
+        response = await apiFetch("/auth/logout", { method: "POST" });
+        if (response.ok) {
+            console.log("User logged out successfully");
+        }
+    } catch (err) {
+        console.error("Error logging out user:", err);
+    } finally {
+        return response;
+    }
+}
+
 export const ShadesmarApi = {
     apiFetch,
     getUser,
+    logoutUser
 };

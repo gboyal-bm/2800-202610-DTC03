@@ -12,6 +12,7 @@
 import { useEffect, useState } from "react";
 import { ShadesmarApi } from "../utils/shadesmar_api"
 import { AuthContext } from "./authContext";
+import { useLocation } from "react-router-dom";
 
 
 interface AuthProviderProps {
@@ -30,12 +31,13 @@ async function setContextUser(setUser: Function, setLoading: Function) {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
+    const location = useLocation();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setContextUser(setUser, setLoading);
-    }, []);
+    }, [location.pathname]);
 
     return (
         <AuthContext.Provider value={{ user, setUser, loading }}>

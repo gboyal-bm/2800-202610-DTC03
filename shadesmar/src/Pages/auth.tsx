@@ -16,7 +16,7 @@ export function Auth({ mode }: AuthModes) {
         username: "",
         email: "",
         password: "",
-        rememberMe: true,
+        rememberMe: false,
     });
     const [errors, setErrors] = useState<string[]>([]);
 
@@ -130,7 +130,13 @@ export function Auth({ mode }: AuthModes) {
                 </div>
 
                 <div className="flex flex-row gap-2 items-center justify-baseline">
-                    <input className="size-5" type="checkbox" name="remember-me" id="remember-me"/>
+                    <input className="size-5"
+                        type="checkbox"
+                        name="rememberMe"
+                        id="rememberMe"
+                        checked={form.rememberMe}
+                        onChange={handleChange}
+                    />
                     <label className="font-semibold">Remember Me</label>
                 </div>
 
