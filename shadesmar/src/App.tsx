@@ -12,6 +12,7 @@ import { Footer } from "./components/footer";
 import { Auth } from "./Pages/auth";
 import { AITest } from "./Pages/aitest";
 import { NotFound } from "./Pages/notfound";
+import { WeatherTest } from "./Pages/weathertest";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/register" element={<Auth mode="register" />} />
                     <Route path="/tips" element={<Tips />}></Route>
                     <Route path="/aitest" element={<AITest />}></Route>
+                    <Route path="/weathertest" element={<WeatherTest />}></Route>
 
                     {/* Protected routes */}
                     <Route path="/exploration" element={<ProtectedRoute> <Exploration /> </ProtectedRoute>} />
