@@ -12,7 +12,7 @@ import { Footer } from "./components/footer";
 import { Auth } from "./Pages/auth";
 import { AITest } from "./Pages/aitest";
 import { NotFound } from "./Pages/notfound";
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const pageTitles: Record<string, string> = {
