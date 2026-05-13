@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 export function NotFound() {
+    const navigate = useNavigate();
     const handleBackHome = () => {
-        window.location.href = "/home";
+        navigate("/", { replace: true });
     };
 
     return (
