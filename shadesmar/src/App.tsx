@@ -38,6 +38,7 @@ function App() {
     return (
         <Router>
             <Navbar />
+            <TitleManager />
             <AuthProvider>
                 <Routes>
                     <Route path="/" element={<Home />} />
