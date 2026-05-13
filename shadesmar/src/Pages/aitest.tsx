@@ -16,7 +16,7 @@ export function AITest() {
     }
 
     return (
-        <main className="h-[80vh] max-w-5xl mx-auto mt-12">
+        <main className="min-h-[80vh] max-w-5xl mx-auto mt-12">
             <div className="flex justify-center">
                 <h1 className="text-4xl font-bold">AI Test</h1>
             </div>
