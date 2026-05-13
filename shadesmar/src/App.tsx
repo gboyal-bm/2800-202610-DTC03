@@ -10,7 +10,7 @@ import { Navbar } from "./components/navbar";
 import { Tips } from "./Pages/tips";
 import { Footer } from "./components/footer";
 import { Auth } from "./Pages/auth";
-import { AITest } from "./Pages/aiTest";
+import { AITest } from "./Pages/aitest";
 
 function App() {
     return (
