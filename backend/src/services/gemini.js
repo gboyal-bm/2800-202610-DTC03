@@ -1,23 +1,22 @@
+/**
+ * @fileoverview Entrypoint for connecting to Google Gemini AI
+ * @description Handles the connecting and sending of messages to the AI
+ * 
+ * @module gemini
+ * @author Gustavo Rodriguez
+ * @version 2026
+ */
+
 require("dotenv").config();
 const { GoogleGenAI } = require("@google/genai");
 
 const key = process.env.GEMINI_API_KEY;
-let ai = null;
-
-async function getAI() {
-    if (!ai) {
-        const { GoogleGenAI } = await import("@google/genai");
-
-        ai = new GoogleGenAI({
-            apiKey: process.env.GEMINI_KEY,
-        });
-    }
-
-    return ai;
-}
+const ai = new GoogleGenAI({
+    apiKey: process.env.GEMINI_KEY,
+});
 
 async function sendMessage(message) {
-    const aiInstance = await getAI();
+    const aiInstance = ai;
     const response = await ai.models.generateContent({
         model: "gemini-2.5-flash",
         contents: message,
