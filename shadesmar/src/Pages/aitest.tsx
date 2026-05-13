@@ -29,12 +29,14 @@ export function AITest() {
                     placeholder="Type prompt..."
                     className="p-4 border-2 rounded-lg w-full"
                 />
-                <button onClick={submitMessage} className="bg-slate-200 text-lg p-2 border rounded-md">
-                    Send Message
-                </button>
-                <button onClick={submitInfo} className="bg-slate-200 text-lg p-2 border rounded-md">
-                    Recommend Activity
-                </button>
+                <div className="flex flex-row gap-4">
+                    <button onClick={submitMessage} className="bg-slate-200 text-lg p-2 border rounded-md">
+                        Send Message
+                    </button>
+                    <button onClick={submitInfo} className="bg-slate-200 text-lg p-2 border rounded-md">
+                        Recommend Activity
+                    </button>
+                </div>
             </div>
 
             <div className="bg-blue-300 p-8 rounded-lg m-8">
