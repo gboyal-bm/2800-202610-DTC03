@@ -1,6 +1,6 @@
 import "./App.css";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/authProvider";
 import { ProtectedRoute } from "./components/protectedRoute";
 import { Home } from "./Pages/home";
 import { Exploration } from "./Pages/exploration";

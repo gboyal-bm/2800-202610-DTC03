@@ -1,5 +1,5 @@
-import { replace, useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/authContext";
 import { useEffect } from "react";
 
 interface ProtectedRouteProps {
