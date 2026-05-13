@@ -23,7 +23,8 @@ const session = require("express-session");
 // Internal modules
 const sessionConfig = require("./config/session");
 const helmetConfig = require("./config/helmet");
-const {connectDB} = require("./utils/database");
+const { connectDB } = require("./utils/database");
+const { debugIncomingRequest } = require("./utils/debug");
 
 // Routes
 const authRoutes = require("./routes/auth");
@@ -49,23 +50,15 @@ async function main() {
 
     // Setup
     app.use(helmetConfig);
-    // app.use(
-    //     helmet({
-    //         contentSecurityPolicy: {
-    //             directives: {
-    //                 defaultSrc: ["'self'"],
-    //                 connectSrc: ["'self'"],
-    //                 scriptSrc: ["'self'"],
-    //                 styleSrc: ["'self'"],
-    //                 imgSrc: ["'self'"],
-    //             },
-    //         },
-    //     })
-    // );
     app.use(sessionConfig);
 
     // Start
     app.use(express.json());
+
+    // Test
+    if (process.env.NODE_ENV == "development") {
+        app.use(debugIncomingRequest);
+    }
 
     // User Login
     app.use("/api/auth", authRoutes);
