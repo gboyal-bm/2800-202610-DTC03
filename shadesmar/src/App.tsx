@@ -10,6 +10,7 @@ import { Navbar } from "./components/navbar";
 import { Tips } from "./Pages/tips";
 import { Footer } from "./components/footer";
 import { Auth } from "./Pages/auth";
+import { AITest } from "./Pages/aiTest";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/login" element={<Auth mode="login" />} />
                     <Route path="/register" element={<Auth mode="register" />} />
                     <Route path="/tips" element={<Tips />}></Route>
+                    <Route path="/aitest" element={<AITest />}></Route>
 
                     {/* Protected routes */}
                     <Route path="/exploration" element={<ProtectedRoute> <Exploration /> </ProtectedRoute>} />

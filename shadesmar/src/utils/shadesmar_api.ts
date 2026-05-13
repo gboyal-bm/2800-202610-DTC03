@@ -11,15 +11,15 @@
  */
 
 /**
- * @typedef {Object} ApiResponse
+ * @typedef {object} ApiResponse
  * @description The formatted JSON response.
  * @property {number | null} status - The HTTP status code, or null if there was an error
- * @property {Object | null} result - The JSON response body, or null if there was an error
+ * @property {object | null} result - The JSON response body, or null if there was an error
  * @property {boolean} ok - Whether the response status is in the range 200-299
  */
 type ApiResponse = {
     status: number | null;
-    result: Object | null;
+    result: object | null;
     ok: boolean;
 };
 
@@ -39,15 +39,15 @@ function responseOk(status: number): boolean {
  * @description Wraps fetch to add custom handling of statuses in requests.
  *
  * @param {string} endpoint - The API endpoint path, such as "/auth/me"
- * @param {Object} options  - Additional options to pass into the request, including the method and body
+ * @param {object} options  - Additional options to pass into the request, including the method and body
  * @returns {Promise<ApiResponse>} - The formatted JSON response
  */
 async function apiFetch(
     endpoint: string,
-    options: Object = {},
+    options: object = {},
     noRedirect: boolean = false
 ): Promise<ApiResponse> {
-    let result: Object | null = null;
+    let result: object | null = null;
     let status: number | null = null;
     try {
         const response = await fetch(`/api${endpoint}`, {
@@ -77,10 +77,10 @@ async function apiFetch(
  * @function getUser
  * @description Fetches the currently logged in user's information.
  *
- * @returns {Promise<Object>} - The formatted JSON response, or null if no user is logged in
+ * @returns {Promise<object>} - The formatted JSON response, or null if no user is logged in
  */
 async function getUser() {
-    let user: Object | null = null;
+    let user: object | null = null;
     try {
         const response = await apiFetch("/auth/me", {}, true);
         if (response.status === 200) {
