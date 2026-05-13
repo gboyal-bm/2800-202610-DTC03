@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
-
 import {useEffect} from "react";
+import logo from "../assets/shadesmar-logo-medium.png";
 //import { homeTour } from "../Components/tours"; disabled for ease of developement
 
 export function Home() {
@@ -21,11 +21,20 @@ export function Home() {
                 className="flex-1 flex items-center justify-center px-6 py-20"
             >
                 <div className="text-center max-w-2xl">
-                    <p className="text-4xl font-bold mb-4 pb-10">
+                    <img
+                        src={logo}
+                        alt="Shadesmar"
+                        className="h-24 w-24 mx-auto mb-6"
+                    />
+                    <p className="text-4xl font-bold mb-4">
                         Welcome to Shadesmar
                     </p>
 
-                    <p className="mb-8">This is a desription</p>
+                    <p className="text-lg text-gray-600 mb-10 leading-relaxed">
+                        Beat the Vancouver heat this summer. Shadesmar helps you discover
+                        shaded locations and cool activities near you so you
+                        can enjoy the outdoors without the scorching sun.
+                    </p>
 
                     {/* Carousel placeholder */}
                     <div
