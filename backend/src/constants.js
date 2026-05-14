@@ -8,5 +8,11 @@ module.exports = {
     VALID_EMAIL_REGEX: /^\S+@\S+\.\S+$/,
 
     DEFAULT_THEME: "light",
-    THEME_OPTIONS: ["light", "dark"]
+    THEME_OPTIONS: ["light", "dark"],
+
+    TOURS_TRACKER: {
+        home: false,
+        explore: false,
+        profile: false,
+    }
 }
