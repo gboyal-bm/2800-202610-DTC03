@@ -25,11 +25,10 @@ const sessionConfig = require("./config/session");
 const helmetConfig = require("./config/helmet");
 const { connectDB } = require("./utils/database");
 
-//Servises
-
 // Routes
 const authRoutes = require("./routes/auth");
 const aiRoutes = require("./routes/ai");
+const weatherRoutes = require("./routes/weather");
 
 // Start server
 
@@ -52,19 +51,6 @@ async function main() {
 
     // Setup
     app.use(helmetConfig);
-    // app.use(
-    //     helmet({
-    //         contentSecurityPolicy: {
-    //             directives: {
-    //                 defaultSrc: ["'self'"],
-    //                 connectSrc: ["'self'"],
-    //                 scriptSrc: ["'self'"],
-    //                 styleSrc: ["'self'"],
-    //                 imgSrc: ["'self'"],
-    //             },
-    //         },
-    //     })
-    // );
     app.use(sessionConfig);
 
     // Start
@@ -75,6 +61,9 @@ async function main() {
 
     // AI
     app.use("/api/ai", aiRoutes);
+
+    // Openweather
+    app.use("/api/weather", weatherRoutes);
 
     // Protected routes
     app.get("/home", (req, res) => {
