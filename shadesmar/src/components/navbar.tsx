@@ -1,5 +1,6 @@
-import {useLocation, Link} from "react-router-dom";
-import {homeTour, mapTour, profileTour} from "./tours";
+import { useLocation, Link } from "react-router-dom";
+import { homeTour, mapTour, profileTour } from "./tours";
+import { useAuth } from "../contexts/authContext";
 import tourIcon from "../assets/tour.svg";
 import logo from "../assets/shadesmar-logo-small.png";
 
@@ -11,6 +12,8 @@ const toursDictionary: Record<string, () => void> = {
 
 export function Navbar() {
     const location = useLocation();
+    const { user } = useAuth();
+    const isAdmin = user && (user as any).role === "admin";
 
     const handleTour = () => {
         const startTour = toursDictionary[location.pathname];
@@ -26,7 +29,9 @@ export function Navbar() {
             <div className="mx-auto flex max-w-6xl items-center justify-between">
                 <Link to="/" className="flex items-center gap-2">
                     <img src={logo} alt="Shadesmar" className="h-10 w-10" />
-                    <span className="text-xl font-bold text-gray-900">Shadesmar</span>
+                    <span className="text-xl font-bold text-gray-900">
+                        Shadesmar
+                    </span>
                 </Link>
                 <ul className="flex gap-6 text-gray-900 font-medium">
                     <li>
@@ -37,7 +42,7 @@ export function Navbar() {
                                     alt="Tour Icon"
                                     width="25"
                                     height="25"
-                                ></img>
+                                />
                             </button>
                         )}
                     </li>
@@ -56,6 +61,13 @@ export function Navbar() {
                             Profile
                         </Link>
                     </li>
+                    {isAdmin && (
+                        <li>
+                            <Link to="/admin" className="hover:text-slate-100">
+                                Admin
+                            </Link>
+                        </li>
+                    )}
                 </ul>
             </div>
         </nav>

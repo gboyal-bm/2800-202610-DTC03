@@ -40,9 +40,9 @@ function TitleManager() {
 function App() {
     return (
         <Router>
-            <Navbar />
-            <TitleManager />
             <AuthProvider>
+                <Navbar />
+                <TitleManager />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Auth mode="login" />} />
