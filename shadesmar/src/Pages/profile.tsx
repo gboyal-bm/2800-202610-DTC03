@@ -62,7 +62,7 @@ export function Profile() {
                         <button className="px-6 py-3 rounded-lg font-medium border border-gray-300 bg-white transition hover:bg-gray-50">
                             Settings
                         </button>
-                        <button className="px-6 py-3 rounded-lg font-medium border border-gray-300 bg-a5 transition hover:opacity-90"
+                        <button className="px-6 py-3 rounded-lg font-medium text-white bg-warning hover:bg-warning-dark transition"
                             onClick={logout}>
                             Logout
                         </button>
