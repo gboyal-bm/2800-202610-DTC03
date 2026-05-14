@@ -28,6 +28,9 @@ const { debugIncomingRequest } = require("./utils/debug");
 
 // Routes
 const authRoutes = require("./routes/auth");
+const activityRoutes = require("./routes/activity");
+// const userJourneyRoutes = require("./routes/user_journey");
+// const userPreferencesRoutes = require("./routes/user_preferences");
 const aiRoutes = require("./routes/ai");
 
 // Start server
@@ -64,13 +67,18 @@ async function main() {
     // User Login
     app.use("/api/auth", authRoutes);
 
+    // TODO: Activities
+    app.use("/api/activities", activityRoutes);
+
+    // User management
+    // TODO: User journey and progress
+    // app.use("/api/user/journey", userJourneyRoutes);
+
+    // TODO: User preferences
+    // app.use("/api/user/preferences", userPreferencesRoutes);
+
     // AI
     app.use("/api/ai", aiRoutes);
-
-    // Protected routes
-    app.get("/home", (req, res) => {
-        res.send("Going home");
-    });
 
     // Start listening
     app.listen(PORT, () => {
