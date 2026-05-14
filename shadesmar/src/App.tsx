@@ -14,6 +14,8 @@ import { AITest } from "./Pages/aitest";
 import { NotFound } from "./Pages/notfound";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { AdminRoute } from "./components/adminRoute";
+import { Admin } from "./Pages/admin";
 
 const pageTitles: Record<string, string> = {
     "/": "Shadesmar - Home",
@@ -24,6 +26,7 @@ const pageTitles: Record<string, string> = {
     "/exploration": "Shadesmar - Exploration",
     "/login": "Shadesmar - Login",
     "/register": "Shadesmar - Register",
+    "/admin": "Shadesmar - Admin",
 };
 
 function TitleManager() {
@@ -43,15 +46,58 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Auth mode="login" />} />
-                    <Route path="/register" element={<Auth mode="register" />} />
+                    <Route
+                        path="/register"
+                        element={<Auth mode="register" />}
+                    />
                     <Route path="/tips" element={<Tips />}></Route>
                     <Route path="/aitest" element={<AITest />}></Route>
-
+                    <Route
+                        path="/admin"
+                        element={
+                            <AdminRoute>
+                                {" "}
+                                <Admin />{" "}
+                            </AdminRoute>
+                        }
+                    />
                     {/* Protected routes */}
-                    <Route path="/exploration" element={<ProtectedRoute> <Exploration /> </ProtectedRoute>} />
-                    <Route path="/map" element={<ProtectedRoute> <Map /> </ProtectedRoute>} />
-                    <Route path="/profile" element={<ProtectedRoute> <Profile /> </ProtectedRoute>} />
-                    <Route path="*" element={<ProtectedRoute> <NotFound /> </ProtectedRoute>} />
+                    <Route
+                        path="/exploration"
+                        element={
+                            <ProtectedRoute>
+                                {" "}
+                                <Exploration />{" "}
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/map"
+                        element={
+                            <ProtectedRoute>
+                                {" "}
+                                <Map />{" "}
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProtectedRoute>
+                                {" "}
+                                <Profile />{" "}
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="*"
+                        element={
+                            <ProtectedRoute>
+                                {" "}
+                                <NotFound />{" "}
+                            </ProtectedRoute>
+                        }
+                    />
                 </Routes>
             </AuthProvider>
             <Footer />
