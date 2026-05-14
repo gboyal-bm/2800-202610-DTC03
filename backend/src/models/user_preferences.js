@@ -23,7 +23,7 @@ const { DEFAULT_THEME, THEME_OPTIONS } = require("../constants");
  * @description User preferences for first time tour, theme, and more.
  * 
  * @typedef {Object} UserPreferences
- * @property {boolean} tourComplete - Whether the user has completed the app tour
+ * @property {boolean} viewTour - Whether the user wants to see tours
  * @property {string} theme - The user's preferred theme
  * @property {Date} updatedAt - The timestamp of preferences most recent update
  */
@@ -40,9 +40,13 @@ const userPreferencesSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    tourComplete: {
+    viewTour: {
         type: Boolean,
         default: false
+    },
+    location: {
+        type: String,
+        required: true,
     },
     theme: {
         type: String,
