@@ -14,7 +14,7 @@ export default defineConfig({
                 "img-src 'self' data: https://*.googleapis.com https://*.gstatic.com",
                 "font-src 'self'",
                 "script-src 'self' 'unsafe-inline'",
-                "frame-src https://www.google.com", // ← this is what was missing
+                "frame-src https://www.google.com",
             ].join("; "),
         },
         proxy: {
