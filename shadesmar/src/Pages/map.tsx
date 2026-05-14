@@ -28,7 +28,7 @@ export function Map() {
                 <section className="mb-12">
                     <div className="overflow-hidden rounded-xl border border-gray-200 shadow-md bg-white">
                         <iframe
-                            src="https://www.google.com/maps/d/u/0/embed?mid=1VnIL5tEG9LK9GiBSjlk1QYxYyYtRjJ0&ehbc=2E312F&noprof=1"
+                            src="https://www.google.com/maps/d/embed?mid=1VnIL5tEG9LK9GiBSjlk1QYxYyYtRjJ0&ehbc=2E312F&noprof=1"
                             width="100%"
                             height="480"
                             style={{ border: 0, display: "block" }}

@@ -15,7 +15,12 @@ module.exports = helmet({
             connectSrc: ["'self'"],
             scriptSrc: ["'self'"],
             styleSrc: ["'self'", "'unsafe-inline'"],
-            imgSrc: ["'self'"]
+            imgSrc: [
+                "'self'",
+                "https://*.googleapis.com",
+                "https://*.gstatic.com",
+            ],
+            frameSrc: ["https://www.google.com"],
         },
     },
 });

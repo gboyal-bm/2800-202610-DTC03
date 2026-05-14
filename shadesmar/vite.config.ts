@@ -1,19 +1,27 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
-  server: {
-    headers: {
-      'Content-Security-Policy': "default-src 'self'; connect-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; script-src 'self' 'unsafe-inline';"
+    plugins: [react(), tailwindcss()],
+    server: {
+        headers: {
+            "Content-Security-Policy": [
+                "default-src 'self'",
+                "connect-src 'self'",
+                "style-src 'self' 'unsafe-inline'",
+                "img-src 'self' data: https://*.googleapis.com https://*.gstatic.com",
+                "font-src 'self'",
+                "script-src 'self' 'unsafe-inline'",
+                "frame-src https://www.google.com", // ← this is what was missing
+            ].join("; "),
+        },
+        proxy: {
+            "/api": {
+                target: "http://localhost:3000",
+                changeOrigin: true,
+            },
+        },
     },
-    proxy: {
-      "/api": {
-        target: "http://localhost:3000",
-        changeOrigin: true,
-      }
-    }
-  }
-})
+});
