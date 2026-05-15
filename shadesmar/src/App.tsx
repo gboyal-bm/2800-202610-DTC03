@@ -56,8 +56,7 @@ function App() {
                         path="/admin"
                         element={
                             <AdminRoute>
-                                {" "}
-                                <Admin />{" "}
+                                <Admin />
                             </AdminRoute>
                         }
                     />
@@ -66,8 +65,7 @@ function App() {
                         path="/exploration"
                         element={
                             <ProtectedRoute>
-                                {" "}
-                                <Exploration />{" "}
+                                <Exploration />
                             </ProtectedRoute>
                         }
                     />
@@ -75,8 +73,7 @@ function App() {
                         path="/map"
                         element={
                             <ProtectedRoute>
-                                {" "}
-                                <Map />{" "}
+                                <Map />
                             </ProtectedRoute>
                         }
                     />
@@ -84,20 +81,12 @@ function App() {
                         path="/profile"
                         element={
                             <ProtectedRoute>
-                                {" "}
-                                <Profile />{" "}
+                                <Profile />
                             </ProtectedRoute>
                         }
                     />
-                    <Route
-                        path="*"
-                        element={
-                            <ProtectedRoute>
-                                {" "}
-                                <NotFound />{" "}
-                            </ProtectedRoute>
-                        }
-                    />
+                    
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </AuthProvider>
             <Footer />
