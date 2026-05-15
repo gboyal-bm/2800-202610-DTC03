@@ -74,16 +74,17 @@ const createActivity = async (req, res) => {
 
 const updateActivity = async (req, res) => {
     const { name, location, category, description } = req.body;
-    const updated = {};
-    if (name) { updated.name = name; }
-    if (location) { updated.location = location; }
-    if (category) { updated.category = category; }
-    if (description) { updated.description = description; }
+    const updated = Object.fromEntries(
+        Object.entries({ name, location, category, description }).filter(
+            ([_, value]) => value !== undefined && value !== null
+        )
+    );
+    let activity = undefined;
     try {
-        const activity = await Activity.findByIdAndUpdate(
+        activity = await Activity.findByIdAndUpdate(
             req.params.id,
             updated,
-            { new: true }
+            { returnDocument: "after" }
         );
         if (!activity) {
             return res.status(404).json({ message: "Activity not found" });
