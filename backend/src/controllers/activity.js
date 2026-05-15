@@ -53,7 +53,8 @@ const getActivityById = async (req, res) => {
 // Manage activities (admin locked)
 
 const createActivity = async (req, res) => {
-    const activity = new Activity(req.body);
+    const { name, location, category, description } = req.body;
+    const activity = new Activity({ name, location, category, description });
     try {
         await activity.save();
     } catch (err) {
@@ -72,29 +73,37 @@ const createActivity = async (req, res) => {
 };
 
 const updateActivity = async (req, res) => {
-    res.json({ message: "Update activity" });
-    // try {
-    //     const activity = await Activity.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    //     if (!activity) {
-    //         return res.status(404).json({ message: "Activity not found" });
-    //     }
-    //     res.json(activity);
-    // } catch (error) {
-    //     res.status(400).json({ message: error.message });
-    // }
+    const { name, location, category, description } = req.body;
+    const updated = {};
+    if (name) { updated.name = name; }
+    if (location) { updated.location = location; }
+    if (category) { updated.category = category; }
+    if (description) { updated.description = description; }
+    try {
+        const activity = await Activity.findByIdAndUpdate(
+            req.params.id,
+            updated,
+            { new: true }
+        );
+        if (!activity) {
+            return res.status(404).json({ message: "Activity not found" });
+        }
+    } catch (err) {
+        res.status(400).json({ message: "Server error: " + err.message });
+    }
+    res.status(200).json(activity);
 };
 
 const deleteActivity = async (req, res) => {
-    res.json({ message: "Delete activity" });
-    // try {
-    //     const activity = await Activity.findByIdAndDelete(req.params.id);
-    //     if (!activity) {
-    //         return res.status(404).json({ message: "Activity not found" });
-    //     }
-    //     res.json({ message: "Activity deleted" });
-    // } catch (error) {
-    //     res.status(500).json({ message: error.message });
-    // }
+    try {
+        const activity = await Activity.findByIdAndDelete(req.params.id);
+        if (!activity) {
+            return res.status(404).json({ message: "Activity not found" });
+        }
+    } catch (err) {
+        res.status(500).json({ message: "Server error: " + err.message });
+    }
+    res.status(200).json({ message: "Activity deleted" });
 };
 
 module.exports = {
