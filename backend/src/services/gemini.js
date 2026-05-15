@@ -6,8 +6,6 @@ let ai = null;
 
 async function getAI() {
     if (!ai) {
-        const { GoogleGenAI } = await import("@google/genai");
-
         ai = new GoogleGenAI({
             apiKey: process.env.GEMINI_KEY,
         });
