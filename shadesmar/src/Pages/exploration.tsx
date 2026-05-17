@@ -1,5 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { ActivityCard } from "../components/activityCard";
+import { FloatingButton } from "../components/floatingButton";
+import { RecommendationChatbox } from "../components/recommendationChatbox";
 import { Map } from "./map";
 import { ShadesmarApi } from "../utils/shadesmar_api";
 
@@ -127,6 +129,7 @@ export function Exploration() {
                         ))}
                     </div>
                 )}
+                <FloatingButton contents={<RecommendationChatbox/>}/>
             </div>
         </div>
     );
