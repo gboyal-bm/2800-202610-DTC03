@@ -38,32 +38,7 @@ export function Map() {
                         />
                     </div>
                 </section>
-
-                {/* Info Cards Below the Map */}
-                <section className="py-8 bg-a2 rounded-xl px-6">
-                    <h3 className="text-2xl font-bold mb-8 text-center">
-                        Map Highlights
-                    </h3>
-                    <div className="grid gap-6 md:grid-cols-3">
-                        <div className="p-6 border rounded-lg bg-white hover:shadow-md transition">
-                            Highlight 1
-                        </div>
-                        <div className="p-6 border rounded-lg bg-white hover:shadow-md transition">
-                            Highlight 2
-                        </div>
-                        <div className="p-6 border rounded-lg bg-white hover:shadow-md transition">
-                            Highlight 3
-                        </div>
-                    </div>
-                </section>
             </div>
-
-            {/* Footer */}
-            <footer className="mt-16 border-t bg-gray-50">
-                <div className="max-w-6xl mx-auto px-6 py-6 text-center text-sm text-gray-500">
-                    © Footer Stuff
-                </div>
-            </footer>
         </div>
     );
 }

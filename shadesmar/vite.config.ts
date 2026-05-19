@@ -11,7 +11,7 @@ export default defineConfig({
                 "default-src 'self'",
                 "connect-src 'self'",
                 "style-src 'self' 'unsafe-inline'",
-                "img-src 'self' data: https://*.googleapis.com https://*.gstatic.com",
+                "img-src 'self' data: https://*.googleapis.com https://*.gstatic.com https://images.unsplash.com",
                 "font-src 'self'",
                 "script-src 'self' 'unsafe-inline'",
                 "frame-src https://www.google.com",

@@ -19,6 +19,7 @@ module.exports = helmet({
                 "'self'",
                 "https://*.googleapis.com",
                 "https://*.gstatic.com",
+                "https://images.unsplash.com",
             ],
             frameSrc: ["https://www.google.com"],
         },

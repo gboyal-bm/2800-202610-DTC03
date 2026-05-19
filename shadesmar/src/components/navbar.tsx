@@ -52,7 +52,10 @@ export function Navbar() {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/map" className="hover:text-slate-100">
+                        <Link
+                            to="/exploration"
+                            className="hover:text-slate-100"
+                        >
                             Explore
                         </Link>
                     </li>
