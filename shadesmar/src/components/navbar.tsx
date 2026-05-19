@@ -68,6 +68,14 @@ export function Navbar() {
                             </Link>
                         </li>
                     )}
+                    <li>
+                        <Link
+                            to="/request-activity"
+                            className="hover:text-slate-100"
+                        >
+                            Request Activity
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </nav>

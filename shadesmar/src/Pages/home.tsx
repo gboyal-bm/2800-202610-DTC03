@@ -1,5 +1,5 @@
-import {Link} from "react-router-dom";
-import {useEffect} from "react";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import logo from "../assets/shadesmar-logo-medium.png";
 //import { homeTour } from "../Components/tours"; disabled for ease of developement
 
@@ -31,9 +31,9 @@ export function Home() {
                     </p>
 
                     <p className="text-lg text-gray-600 mb-10 leading-relaxed">
-                        Beat the Vancouver heat this summer. Shadesmar helps you discover
-                        shaded locations and cool activities near you so you
-                        can enjoy the outdoors without the scorching sun.
+                        Beat the Vancouver heat this summer. Shadesmar helps you
+                        discover shaded locations and cool activities near you
+                        so you can enjoy the outdoors without the scorching sun.
                     </p>
 
                     {/* Carousel placeholder */}

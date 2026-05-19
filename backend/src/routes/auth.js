@@ -1,7 +1,7 @@
 /**
  * @fileoverview Authentication and account management routes
  * @module routes/auth
- * 
+ *
  * @description Defines routes for user authentication and account management.
  */
 
@@ -14,14 +14,9 @@ const router = express.Router();
 // Internal modules
 
 const authMiddleware = require("../middleware/auth");
-
+const adminMiddleware = require("../middleware/admin");
 // Controllers
-const {
-    register,
-    login,
-    logout,
-    getMe
-} = require("../controllers/auth");
+const { register, login, logout, getMe } = require("../controllers/auth");
 
 // Routes
 
@@ -33,5 +28,6 @@ router.post("/login", login);
 router.use(authMiddleware.authenticate);
 router.post("/logout", logout);
 router.get("/me", getMe);
+router.get("/admin", adminMiddleware, getMe);
 
 module.exports = router;

@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { AdminRoute } from "./components/adminRoute";
 import { Admin } from "./Pages/admin";
+import { ActivityRequest } from "./Pages/activityRequest";
 
 const pageTitles: Record<string, string> = {
     "/": "Shadesmar - Home",
@@ -60,6 +61,14 @@ function App() {
                             </AdminRoute>
                         }
                     />
+                    <Route
+                        path="/request-activity"
+                        element={
+                            <ProtectedRoute>
+                                <ActivityRequest />
+                            </ProtectedRoute>
+                        }
+                    />
                     {/* Protected routes */}
                     <Route
                         path="/exploration"
@@ -85,7 +94,7 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
-                    
+
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </AuthProvider>
