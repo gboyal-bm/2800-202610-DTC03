@@ -17,7 +17,7 @@
  * @property {object | null} result - The JSON response body, or null if there was an error
  * @property {boolean} ok - Whether the response status is in the range 200-299
  */
-type ApiResponse = {
+export type ApiResponse = {
     status: number | null;
     result: object | null;
     ok: boolean;

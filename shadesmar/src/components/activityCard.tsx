@@ -1,5 +1,6 @@
 // import { Link } from "react-router-dom";
 import { ShadesmarApi } from "../utils/shadesmar_api";
+import type { ApiResponse } from "../utils/shadesmar_api";
 
 interface ActivityCardProps {
     id: string;
@@ -19,7 +20,7 @@ export function ActivityCard({
 }: ActivityCardProps) {
     const handleCompleteActivity = async () => {
         const response = await ShadesmarApi.addExperience(10);
-        if (response && response.ok) {
+        if (response && (response as ApiResponse).ok) {
             alert("Activity completed! You've earned 10 experience points.");
         } else {
             alert("Error completing activity. Please try again.");
