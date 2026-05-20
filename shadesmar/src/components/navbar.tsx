@@ -27,7 +27,6 @@ export function Navbar() {
                 <Link to="/" className="flex items-center gap-2.5 no-underline">
                     <img src={logo} alt="Shadesmar" className="h-9 w-9" />
                     <span style={{
-                        fontFamily: "'Cinzel', serif",
                         fontSize: "17px",
                         fontWeight: 600,
                         letterSpacing: "0.08em",
