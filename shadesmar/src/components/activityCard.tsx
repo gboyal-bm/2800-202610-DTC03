@@ -13,7 +13,6 @@ interface ActivityCardProps {
 
 
 export function ActivityCard({
-    id,
     title,
     description,
     imageSrc,
