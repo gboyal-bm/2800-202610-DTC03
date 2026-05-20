@@ -1,6 +1,7 @@
 // import { Link } from "react-router-dom";
 import { ShadesmarApi } from "../utils/shadesmar_api";
 import type { ApiResponse } from "../utils/shadesmar_api";
+import { useAuth } from "../contexts/authContext";
 
 interface ActivityCardProps {
     id: string;
@@ -18,6 +19,7 @@ export function ActivityCard({
     imageSrc,
     category,
 }: ActivityCardProps) {
+    const { user } = useAuth();
     const handleCompleteActivity = async () => {
         const response = await ShadesmarApi.addExperience(10);
         if (response && (response as ApiResponse).ok) {
@@ -52,12 +54,14 @@ export function ActivityCard({
                         <button className="mt-4 text-sm font-medium text-a5 duration-500 hover:underline">
                             Learn More →
                         </button>
-                        <button
-                            className="mt-4 text-sm text-white px-4 py-2 rounded-lg font-medium border border-gray-300 shadow -translate-y-0.5 bg-a4 transition hover:-translate-y-1 active:translate-y-0 hover:bg-a4/50"
-                            onClick={handleCompleteActivity}
-                        >
-                            Complete!
-                        </button>
+                        {user && (
+                            <button
+                                className="mt-4 text-sm text-white px-4 py-2 rounded-lg font-medium border border-gray-300 shadow -translate-y-0.5 bg-a4 transition hover:-translate-y-1 active:translate-y-0 hover:bg-a4/50"
+                                onClick={handleCompleteActivity}
+                            >
+                                Complete!
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
