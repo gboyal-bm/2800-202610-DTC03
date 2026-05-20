@@ -116,17 +116,17 @@ export function Home() {
                     >
                         <Link to="/tips">
                             <div className="p-6 border bg-a4 rounded-lg hover:shadow-md transition text-center tracking-wider text-xl font-bold">
-                                ☀️ Summer Tips
+                                Summer Tips
                             </div>
                         </Link>
                         <Link to="/map">
                             <div className="p-6 border rounded-lg hover:shadow-md transition text-center tracking-wider text-xl font-bold">
-                                🗺️ Shade Map
+                                Shade Map
                             </div>
                         </Link>
                         <Link to="/exploration">
                             <div className="p-6 border rounded-lg hover:shadow-md transition text-center tracking-wider text-xl font-bold">
-                                🌿 Explore Activities
+                                Explore Activities
                             </div>
                         </Link>
                     </div>
