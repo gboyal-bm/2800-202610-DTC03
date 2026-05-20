@@ -5,7 +5,30 @@ import { ShadesmarApi } from "../utils/shadesmar_api";
 import logo from "../assets/shadesmar-logo-medium.png";
 //import { homeTour } from "../Components/tours"; disabled for ease of developement
 
+const CATEGORY_IMAGES: Record<string, string> = {
+    adventure:
+        "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+    sport: "https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&w=800&q=80",
+    hiking: "https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80",
+    cycling:
+        "https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&w=800&q=80",
+    water: "https://images.unsplash.com/photo-1530870110042-98b2cb110834?auto=format&fit=crop&w=800&q=80",
+    cultural:
+        "https://images.unsplash.com/photo-1568797629192-789acf8e4df3?auto=format&fit=crop&w=800&q=80",
+    food: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80",
+    nature: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
+};
+
+const FALLBACK_IMAGE =
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80";
+
+function getImage(category: string): string {
+    return CATEGORY_IMAGES[category.toLowerCase()] ?? FALLBACK_IMAGE;
+}
+
 export function Home() {
+
+    
     useEffect(() => {
         const hasSeenTour = localStorage.getItem("homes_tour_seen");
 
@@ -18,7 +41,7 @@ export function Home() {
     const [activities, setActivities] = useState<any[]>([]);
 
     useEffect(() => {
-        ShadesmarApi.apiFetch("/activity", {}, true).then((res) => {
+        ShadesmarApi.apiFetch("/activities", {}, true).then((res) => {
             if (res.ok && res.result) {
                 const data = res.result as { results: any[] };
                 setActivities(data.results.slice(0, 5));
@@ -62,7 +85,7 @@ export function Home() {
                                         id={activity._id}
                                         title={activity.name}
                                         description={activity.description}
-                                        imageSrc={"https://placehold.co/400x300?text=" + encodeURIComponent(activity.name)}
+                                        imageSrc={getImage(activity.category)}
                                         category={activity.category}
                                     />
                                 </div>
