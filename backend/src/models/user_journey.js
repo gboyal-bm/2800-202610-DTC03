@@ -26,6 +26,7 @@ const { TOURS_TRACKER } = require("../constants");
  * @property {Object} toursStatus - The user's completion status for each app tour
  * @property {Array<ObjectId>} savedActivities - The IDs of the user's saved activities
  * @property {Array<ObjectId>} savedItinerary - The IDs of the user's saved itineraies
+ * @property {Number} experience - The user's experience points
  * @property {Date} updatedAt - The timestamp of the most recent update
  */
 
@@ -40,6 +41,11 @@ const userJourneySchema = new mongoose.Schema({
         ref: "User",
         required: true,
         unique: true
+    },
+    experience: {
+        type: Number,
+        default: 0,
+        required: true,
     },
     toursStatus: {
         type: Object,

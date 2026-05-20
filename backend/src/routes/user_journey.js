@@ -17,19 +17,24 @@ const authMiddleware = require("../middleware/auth");
 
 // Controllers
 const {
-    get,
-    updateUserJourney
+    getExperience,
+    addExperience,
+    removeExperience,
+    // getSavedActivities,
+    // getTourStatus,
+    // updateTourStatus,
+    // saveActivity,
+    // unsaveActivity
 } = require("../controllers/user_journey");
 
 // Routes
 
-// Authentication
-router.post("/register", authMiddleware.validateNewUser, register);
-router.post("/login", login);
-
 // Protected routes
 router.use(authMiddleware.authenticate);
-router.post("/logout", logout);
-router.get("/me", getMe);
+router.get("/experience", getExperience);
+router.post("/experience", addExperience);
+router.delete("/experience", removeExperience);
+
+
 
 module.exports = router;

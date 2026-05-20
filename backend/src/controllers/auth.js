@@ -16,7 +16,8 @@
 const { startSession, validateNewUser } = require("../utils/auth");
 
 const User = require("../models/user");
-const UserPreferences = require("../models/user_preferences");
+// const UserPreferences = require("../models/user_preferences");
+const UserJourney = require("../models/user_journey");
 const { SESSION_NAME } = require("../constants");
 const { default: mongoose } = require("mongoose");
 
@@ -53,9 +54,9 @@ const register = async (req, res) => {
                 message: "Server error: " + err.message,
             });
         }
-        const userPreferences = new UserPreferences({ userId: newUser._id });
+        const userJourney = new UserJourney({ userId: newUser._id });
         try {
-            await userPreferences.save();
+            await userJourney.save();
         } catch (err) {
             await session.abortTransaction();
             return res.status(500).json({
@@ -132,6 +133,8 @@ const getMe = async (req, res) => {
             .json({ message: "Server error: " + err.message });
     }
     res.status(200).json({
+        _id: user._id,
+        id: user._id,
         username: user.username,
         email: user.email,
         createdAt: user.createdAt,

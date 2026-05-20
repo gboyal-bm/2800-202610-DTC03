@@ -30,7 +30,7 @@ const { debugIncomingRequest } = require("./utils/debug");
 const authRoutes = require("./routes/auth");
 const activityRoutes = require("./routes/activity");
 const activityRequestRoutes = require("./routes/activity_requests");
-// const userJourneyRoutes = require("./routes/user_journey");
+const userJourneyRoutes = require("./routes/user_journey");
 // const userPreferencesRoutes = require("./routes/user_preferences");
 const aiRoutes = require("./routes/ai");
 // Start server
@@ -74,8 +74,7 @@ async function main() {
     app.use("/api/activity-requests", activityRequestRoutes);
 
     // User management
-    // TODO: User journey and progress
-    // app.use("/api/user/journey", userJourneyRoutes);
+    app.use("/api/user/", userJourneyRoutes);
 
     // TODO: User preferences
     // app.use("/api/user/preferences", userPreferencesRoutes);
