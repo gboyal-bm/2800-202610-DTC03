@@ -26,7 +26,7 @@ type ApiResponse = {
 /**
  * @function responseOk
  * @description Checks if a given HTTP status code is in the range 200-299, indicating a successful response.
- * 
+ *
  * @param {number} status - The HTTP status code to check
  * @returns {boolean} - Whether the status code represents a successful response
  */
@@ -68,7 +68,11 @@ async function apiFetch(
         if (status == 401 && !noRedirect) {
             window.location.replace("/login");
         }
-        const apiResponse: ApiResponse = { status, result, ok: responseOk(status as number) };
+        const apiResponse: ApiResponse = {
+            status,
+            result,
+            ok: responseOk(status as number),
+        };
         return apiResponse;
     }
 }
@@ -113,8 +117,54 @@ async function logoutUser(): Promise<object | null> {
     }
 }
 
+/**
+ * @function addExperience
+ * @description Adds experience points to the currently logged in user.
+ *
+ * @param {number} experience - The amount of experience points to add
+ * @returns {Promise<Object>} - The formatted JSON response, or null if no user is logged in
+ */
+async function addExperience(experience: number): Promise<object | null> {
+    let response: ApiResponse | null = null;
+    try {
+        response = await apiFetch("/user/experience", {
+            method: "POST",
+            body: JSON.stringify({ experience }),
+        });
+    } catch (err) {
+        console.error("Error adding experience:", err);
+    } finally {
+        return response;
+    }
+}
+
+/**
+ * @function getExperience
+ * @description Fetches the currently logged in user's experience points.
+ * 
+ * @returns {Promise<Object>} - The formatted JSON response with result.experience, or null if no use is logged in
+ */
+async function getExperience(): Promise<object | null> {
+    let response: ApiResponse | null = null;
+    try {
+        response = await apiFetch("/user/experience");
+        if (response.ok) {
+            console.log(
+                "User experience:",
+                (response.result as any).experience
+            );
+        }
+    } catch (err) {
+        console.error("Error fetching experience:", err);
+    } finally {
+        return response;
+    }
+}
+
 export const ShadesmarApi = {
     apiFetch,
     getUser,
-    logoutUser
+    logoutUser,
+    getExperience,
+    addExperience,
 };

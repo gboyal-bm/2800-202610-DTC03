@@ -44,7 +44,7 @@ const addExperience = async (req, res) => {
         userJourney = await UserJourney.findOneAndUpdate(
             { userId: req.user.id },
             { $inc: { experience } },
-            { new: true }
+            { returnDocument: "after" }
         );
     } catch (err) {
         return res.status(500).json({ message: "Server error: " + err.message });
@@ -67,7 +67,7 @@ const removeExperience = async (req, res) => {
         userJourney = await UserJourney.findOneAndUpdate(
             { userId: req.user.id },
             { $inc: { experience: -experience } },
-            { new: true }
+            { returnDocument: "after" }
         );
     } catch (err) {
         return res.status(500).json({ message: "Server error: " + err.message });

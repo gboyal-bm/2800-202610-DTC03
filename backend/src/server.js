@@ -74,7 +74,7 @@ async function main() {
     app.use("/api/activity-requests", activityRequestRoutes);
 
     // User management
-    app.use("/api/user/", userJourneyRoutes);
+    app.use("/api/user", userJourneyRoutes);
 
     // TODO: User preferences
     // app.use("/api/user/preferences", userPreferencesRoutes);
