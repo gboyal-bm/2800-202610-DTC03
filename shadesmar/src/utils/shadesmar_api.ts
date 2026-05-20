@@ -142,7 +142,7 @@ async function addExperience(experience: number): Promise<object | null> {
  * @function getExperience
  * @description Fetches the currently logged in user's experience points.
  * 
- * @returns {Promise<Object>} - The formatted JSON response with result.experience, or null if no use is logged in
+ * @returns {Promise<number | Object | null>} - The formatted JSON response with result.experience, or null if no use is logged in
  */
 async function getExperience(): Promise<object | null> {
     let response: ApiResponse | null = null;
@@ -157,7 +157,7 @@ async function getExperience(): Promise<object | null> {
     } catch (err) {
         console.error("Error fetching experience:", err);
     } finally {
-        return response;
+        return (response as any).result.experience || response;
     }
 }
 

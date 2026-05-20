@@ -1,26 +1,45 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { ShadesmarApi } from "../utils/shadesmar_api";
 //import { profileTour } from "../Components/tours"; disabled for ease of developement
 
-async function logout() {
-    try {
-        await ShadesmarApi.logoutUser();
-        window.location.replace("/login");
-    } catch (err) {
-        console.error("Logout error:", err);
-    }
-}
-
 export function Profile() {
     const account = useAuth().user as any; // Type assertion to access username and email
+    const [experience, setExperience] = useState(0);
     const userInfo = {
         name: account?.username || "Username",
         email: account?.email || "abc123@example.com",
         bio: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam deserunt illo iure perspiciatis hic repellat.",
         location: "Vancouver, BC",
-        level: "1",
+        experience: experience % 100 || 0,
+        level: Math.floor(experience / 100),
     };
+
+    const logout = async () => {
+        try {
+            await ShadesmarApi.logoutUser();
+            window.location.replace("/login");
+        } catch (err) {
+            console.error("Logout error:", err);
+        }
+    };
+
+    const setLevels = async () => {
+        console.log("Fetching experience...");
+        try {
+            const exp = await ShadesmarApi.getExperience();
+            setExperience(exp as React.SetStateAction<number>);
+        } catch (err) {
+            console.error("Error fetching experience:", err);
+        }
+    };
+
+    // Experience and levels
+    useEffect(() => {
+        setLevels();
+        userInfo.experience = experience % 100;
+        userInfo.level = Math.floor(experience / 100);
+    }, [location.pathname]);
 
     // Tour
     useEffect(() => {
@@ -42,16 +61,26 @@ export function Profile() {
                         Icon
                     </div>
                     <div className="flex justify-center gap-4 ml-4">
-                        <h1 className="text-4xl font-bold mb-2">{userInfo.name}</h1>
-                        <div className="w-12 h-12 bg-white border-2 border-dashed border-gray-300 rounded-full flex items-center justify-center text-3xl">
-                            <h1 className="text-4xl font-bold mb-1">
-                                {userInfo.level}
-                            </h1>
-                        </div>
+                        <h1 className="text-4xl font-bold mb-2">
+                            {userInfo.name}
+                        </h1>
                     </div>
                     <p className="text-gray-500 mb-6 font-medium">
                         {userInfo.location}
                     </p>
+                    <div className="max-w-fit mx-auto flex items-center justify-center gap-4 mb-6">
+                        <div className="w-12 h-12 bg-white border-2 border-gray-300 rounded-full flex items-center justify-center text-3xl">
+                            <h1 className="text-4xl font-bold mb-1">
+                                {userInfo.level}
+                            </h1>
+                        </div>
+                        <progress
+                            id="ExperienceBar"
+                            className="bg-a2 rounded border-2 border-a5"
+                            value={userInfo.experience}
+                            max="100"
+                        ></progress>
+                    </div>
 
                     <p className="text-lg mb-10">{userInfo.bio}</p>
 
@@ -62,8 +91,10 @@ export function Profile() {
                         <button className="px-6 py-3 rounded-lg font-medium border border-gray-300 bg-white transition hover:bg-gray-50">
                             Settings
                         </button>
-                        <button className="px-6 py-3 rounded-lg font-medium text-white bg-warning hover:bg-warning-dark transition"
-                            onClick={logout}>
+                        <button
+                            className="px-6 py-3 rounded-lg font-medium text-white bg-warning hover:bg-warning-dark transition"
+                            onClick={logout}
+                        >
                             Logout
                         </button>
                     </div>
@@ -86,7 +117,9 @@ export function Profile() {
                             <p className="text-xs font-bold tracking-wider text-gray-400 mb-1">
                                 EMAIL ADDRESS
                             </p>
-                            <p className="text-lg font-medium">{userInfo.email}</p>
+                            <p className="text-lg font-medium">
+                                {userInfo.email}
+                            </p>
                         </div>
 
                         {/* Location Card */}
