@@ -124,6 +124,7 @@ export function Exploration() {
                         {filtered.map((activity) => (
                             <ActivityCard
                                 key={activity._id}
+                                id={activity._id}
                                 title={activity.name}
                                 category={activity.category}
                                 description={activity.description}
