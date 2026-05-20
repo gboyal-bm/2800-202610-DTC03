@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { ActivityCard } from "../components/activityCard";
+import { ShadesmarApi } from "../utils/shadesmar_api";
 import logo from "../assets/shadesmar-logo-medium.png";
 //import { homeTour } from "../Components/tours"; disabled for ease of developement
 
@@ -11,6 +13,17 @@ export function Home() {
             //homeTour(); disabled for ease of developement
             localStorage.setItem("home_tour_seen", "true");
         }
+    }, []);
+
+    const [activities, setActivities] = useState<any[]>([]);
+
+    useEffect(() => {
+        ShadesmarApi.apiFetch("/activity", {}, true).then((res) => {
+            if (res.ok && res.result) {
+                const data = res.result as { results: any[] };
+                setActivities(data.results.slice(0, 5));
+            }
+        });
     }, []);
 
     return (
@@ -36,12 +49,27 @@ export function Home() {
                         so you can enjoy the outdoors without the scorching sun.
                     </p>
 
-                    {/* Carousel placeholder */}
+                    {/* Activity Carousel */}
                     <div
                         id="ActivitiesList"
-                        className="border-2 border-dashed border-gray-300 rounded-xl p-10 mb-8 bg-white"
+                        className="flex gap-4 overflow-x-auto pb-2 mb-8 snap-x snap-mandatory"
                     >
-                        Carousel Placeholder
+                        {activities.length > 0 ? (
+                            activities.map((activity) => (
+                                <div key={activity._id} className="snap-start shrink-0 w-64">
+                                    <ActivityCard
+                                        key={activity._id}
+                                        id={activity._id}
+                                        title={activity.name}
+                                        description={activity.description}
+                                        imageSrc={"https://placehold.co/400x300?text=" + encodeURIComponent(activity.name)}
+                                        category={activity.category}
+                                    />
+                                </div>
+                            ))
+                        ) : (
+                            <p className="text-gray-400 w-full text-center py-8">No activities yet.</p>
+                        )}
                     </div>
 
                     <Link to="/exploration">
