@@ -104,21 +104,21 @@ export function Profile() {
                             fontFamily: "'Outfit', sans-serif",
                         }}
                     >
-                        {isNaN(account?.level) ? "0" : level}
+                        {isNaN(experience) ? "0" : level}
                     </div>
                     <div>
                         <div className="w-48 h-1.5 rounded-full bg-gray-200 overflow-hidden">
                             <div
                                 className="h-full rounded-full transition-all duration-500"
                                 style={{
-                                    width: `${isNaN(account?.xp) ? "0" : xp}%`,
+                                    width: `${isNaN(xp) ? "0" : xp}%`,
                                     background:
                                         "linear-gradient(90deg, #3dd6d6, #6e5ff0)",
                                 }}
                             />
                         </div>
                         <p className="text-xs text-gray-400 mt-1">
-                            {isNaN(account?.xp) ? "0" : xp} / 100 XP
+                            {isNaN(xp) ? "0" : xp} / 100 XP
                         </p>
                     </div>
                 </div>
@@ -200,8 +200,9 @@ export function Profile() {
                                     ))
                                 ) : (
                                     <p className="text-sm font-medium text-gray-800">
-                                        You haven't earned any badges yet. Complete
-                                        activities to earn experience and level up!
+                                        You haven't earned any badges yet.
+                                        Complete activities to earn experience
+                                        and level up!
                                     </p>
                                 )}
                             </div>
