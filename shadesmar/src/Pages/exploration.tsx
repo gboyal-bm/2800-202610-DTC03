@@ -20,7 +20,7 @@ const CATEGORY_IMAGES: Record<string, string> = {
         "https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&w=800&q=80",
     water: "https://images.unsplash.com/photo-1530870110042-98b2cb110834?auto=format&fit=crop&w=800&q=80",
     cultural:
-        "https://images.unsplash.com/photo-1568797629192-789acf8e4df3?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1543906965-f9520aa2ed8a?auto=format&fit=crop&w=800&h=500&q=80",
     food: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80",
     nature: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
 };
@@ -70,7 +70,6 @@ export function Exploration() {
     return (
         <div className="min-h-screen bg-gray-50 px-6 py-12">
             <div className="mx-auto max-w-6xl">
-
                 <Map />
 
                 {/* Search & Filter */}

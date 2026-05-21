@@ -10,6 +10,7 @@ import badge4 from "../assets/badge-t4.png";
 const badges = [badge1, badge2, badge3, badge4];
 
 //import { profileTour } from "../Components/tours"; disabled for ease of developement
+import defaultIcon from "../assets/shadesmar-logo-medium.png";
 
 export function Profile() {
     const account = useAuth().user as any;
@@ -21,8 +22,11 @@ export function Profile() {
     const userInfo = {
         name: account?.username || "Username",
         email: account?.email || "abc123@example.com",
-        bio: "This is a short bio about the user. It can be edited in the profile settings.",
-        location: "Vancouver, BC",
+        bio:
+            account?.bio ||
+            "This is a short bio about the user. It can be edited in the profile settings.",
+        location: account?.location || "Vancouver, BC",
+        icon: account?.icon || defaultIcon,
     };
 
     const logout = async () => {
@@ -62,14 +66,18 @@ export function Profile() {
             <header className="flex flex-col items-center px-6 py-14">
                 {/* Avatar */}
                 <div
-                    className="mb-5 rounded-full p-[3px]"
+                    className="mb-5 rounded-full p-0.75"
                     style={{
                         background: "linear-gradient(135deg, #3dd6d6, #6e5ff0)",
                         boxShadow: "0 0 0 3px #f7f8fa",
                     }}
                 >
                     <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 text-sm">
-                        Icon
+                        <img
+                            src={userInfo.icon}
+                            alt="Profile Icon"
+                            className="w-20 h-20 rounded-full object-cover bg-gray-100"
+                        />
                     </div>
                 </div>
 
@@ -89,28 +97,28 @@ export function Profile() {
                     className="flex items-center gap-3 mb-5"
                 >
                     <div
-                        className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
+                        className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"
                         style={{
                             background:
                                 "linear-gradient(135deg, #3dd6d6, #6e5ff0)",
                             fontFamily: "'Outfit', sans-serif",
                         }}
                     >
-                        {level}
+                        {isNaN(account?.level) ? "0" : level}
                     </div>
                     <div>
                         <div className="w-48 h-1.5 rounded-full bg-gray-200 overflow-hidden">
                             <div
                                 className="h-full rounded-full transition-all duration-500"
                                 style={{
-                                    width: `${xp}%`,
+                                    width: `${isNaN(account?.xp) ? "0" : xp}%`,
                                     background:
                                         "linear-gradient(90deg, #3dd6d6, #6e5ff0)",
                                 }}
                             />
                         </div>
                         <p className="text-xs text-gray-400 mt-1">
-                            {xp} / 100 XP
+                            {isNaN(account?.xp) ? "0" : xp} / 100 XP
                         </p>
                     </div>
                 </div>
@@ -127,11 +135,6 @@ export function Profile() {
                         className={`${btnBase} text-white bg-a4 border border-gray-300 shadow hover:bg-a4/50`}
                     >
                         Edit Profile
-                    </button>
-                    <button
-                        className={`${btnBase} bg-white border border-gray-200 text-gray-600 hover:bg-gray-50`}
-                    >
-                        Settings
                     </button>
                     <button
                         className={`${btnBase} bg-white border text-red-500 hover:bg-red-50`}
