@@ -27,8 +27,6 @@ function getImage(category: string): string {
 }
 
 export function Home() {
-
-    
     useEffect(() => {
         const hasSeenTour = localStorage.getItem("homes_tour_seen");
 
@@ -50,88 +48,98 @@ export function Home() {
     }, []);
 
     return (
-        <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900">
-            {/* Hero / Carousel */}
-            <header
-                id="carousel"
-                className="flex-1 flex items-center justify-center px-6 py-20"
-            >
-                <div className="text-center max-w-2xl">
-                    <img
-                        src={logo}
-                        alt="Shadesmar"
-                        className="h-24 w-24 mx-auto mb-6"
-                    />
-                    <p className="text-4xl font-bold mb-4">
-                        Welcome to Shadesmar
-                    </p>
+        <div className="bg-gray-50">
+            <div className="min-h-screen flex flex-col  text-gray-900">
+                {/* Hero / Carousel */}
+                <header
+                    id="carousel"
+                    className="flex-1 flex items-center justify-center px-6 pt-20"
+                >
+                    <div className="text-center max-w-2xl">
+                        <img
+                            src={logo}
+                            alt="Shadesmar"
+                            className="h-24 w-24 mx-auto mb-6"
+                        />
+                        <p className="text-4xl font-bold mb-4">
+                            Welcome to Shadesmar
+                        </p>
 
-                    <p className="text-lg text-gray-600 mb-10 leading-relaxed">
-                        Beat the Vancouver heat this summer. Shadesmar helps you
-                        discover shaded locations and cool activities near you
-                        so you can enjoy the outdoors without the scorching sun.
-                    </p>
+                        <p className="text-lg text-gray-600 mb-10 leading-relaxed">
+                            Beat the Vancouver heat this summer. Shadesmar helps
+                            you discover shaded locations and cool activities
+                            near you so you can enjoy the outdoors without the
+                            scorching sun.
+                        </p>
 
-                    {/* Activity Carousel */}
-                    <div
-                        id="ActivitiesList"
-                        className="flex gap-4 overflow-x-auto pb-2 mb-8 snap-x snap-mandatory"
-                    >
-                        {activities.length > 0 ? (
-                            activities.map((activity) => (
-                                <div key={activity._id} className="snap-start shrink-0 w-64">
-                                    <ActivityCard
+                        {/* Activity Carousel */}
+                        <div
+                            id="ActivitiesList"
+                            className="flex gap-4 overflow-x-auto pb-2 mb-8 snap-x snap-mandatory"
+                        >
+                            {activities.length > 0 ? (
+                                activities.map((activity) => (
+                                    <div
                                         key={activity._id}
-                                        id={activity._id}
-                                        title={activity.name}
-                                        description={activity.description}
-                                        imageSrc={getImage(activity.category)}
-                                        category={activity.category}
-                                    />
-                                </div>
-                            ))
-                        ) : (
-                            <p className="text-gray-400 w-full text-center py-8">No activities yet.</p>
-                        )}
-                    </div>
+                                        className="snap-start shrink-0 w-64"
+                                    >
+                                        <ActivityCard
+                                            key={activity._id}
+                                            id={activity._id}
+                                            title={activity.name}
+                                            description={activity.description}
+                                            imageSrc={getImage(
+                                                activity.category
+                                            )}
+                                            category={activity.category}
+                                        />
+                                    </div>
+                                ))
+                            ) : (
+                                <p className="text-gray-400 w-full text-center py-8">
+                                    No activities yet.
+                                </p>
+                            )}
+                        </div>
 
-                    <Link to="/exploration">
-                        <button className="px-6 py-3 rounded-lg font-medium bg-a4 transition hover:opacity-90">
-                            Start Exploring
-                        </button>
-                    </Link>
-                </div>
-            </header>
-
-            {/* Features */}
-            <section className="py-16 bg-a2">
-                <div className="max-w-6xl mx-auto px-6">
-                    <h3 className="text-2xl font-bold mb-8 text-center">
-                        Our Features
-                    </h3>
-
-                    <div
-                        id="FeaturesList"
-                        className="grid gap-6 md:grid-cols-3 px-8"
-                    >
-                        <Link to="/tips">
-                            <div className="p-6 border bg-a4 rounded-lg hover:shadow-md transition text-center tracking-wider text-xl font-bold">
-                                Summer Tips
-                            </div>
-                        </Link>
-                        <Link to="/map">
-                            <div className="p-6 border rounded-lg hover:shadow-md transition text-center tracking-wider text-xl font-bold">
-                                Shade Map
-                            </div>
-                        </Link>
                         <Link to="/exploration">
-                            <div className="p-6 border rounded-lg hover:shadow-md transition text-center tracking-wider text-xl font-bold">
-                                Explore Activities
-                            </div>
+                            <button className="px-6 py-3 rounded-lg font-medium bg-a4 transition hover:opacity-90">
+                                Start Exploring
+                            </button>
                         </Link>
                     </div>
-                </div>
-            </section>
+                </header>
+
+                {/* Features */}
+                <section className="py-16">
+                    <div className="max-w-6xl mx-auto px-6">
+                        <h3 className="text-2xl font-bold mb-8 text-center">
+                            Our Features
+                        </h3>
+
+                        <div
+                            id="FeaturesList"
+                            className="grid gap-6 md:grid-cols-3 px-8"
+                        >
+                            <Link to="/tips">
+                                <div className="bg-linear-to-br from-[#3dd6d6] to-[#6e5ff0] p-6 border rounded-lg hover:shadow-md transition text-center tracking-wider text-xl font-bold">
+                                    Summer Tips
+                                </div>
+                            </Link>
+                            <Link to="/map">
+                                <div className="bg-linear-to-br from-[#3dd6d6] to-[#6e5ff0] p-6 border rounded-lg hover:shadow-md transition text-center tracking-wider text-xl font-bold">
+                                    Shade Map
+                                </div>
+                            </Link>
+                            <Link to="/exploration">
+                                <div className="bg-linear-to-br from-[#3dd6d6] to-[#6e5ff0] p-6 border rounded-lg hover:shadow-md transition text-center tracking-wider text-xl font-bold">
+                                    Explore Activities
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
     );
 }
