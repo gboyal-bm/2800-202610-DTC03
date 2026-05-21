@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { ActivityCard } from "../components/activityCard";
 import { ShadesmarApi } from "../utils/shadesmar_api";
 import logo from "../assets/shadesmar-logo-medium.png";
-//import { homeTour } from "../Components/tours"; disabled for ease of developement
 
 const CATEGORY_IMAGES: Record<string, string> = {
     adventure:
@@ -28,10 +27,8 @@ function getImage(category: string): string {
 
 export function Home() {
     useEffect(() => {
-        const hasSeenTour = localStorage.getItem("homes_tour_seen");
-
+        const hasSeenTour = localStorage.getItem("home_tour_seen");
         if (!hasSeenTour) {
-            //homeTour(); disabled for ease of developement
             localStorage.setItem("home_tour_seen", "true");
         }
     }, []);
@@ -49,13 +46,14 @@ export function Home() {
 
     return (
         <div className="bg-gray-50">
-            <div className="min-h-screen flex flex-col  text-gray-900">
+            <div className="min-h-screen w-full flex flex-col text-gray-900">
                 {/* Hero / Carousel */}
                 <header
                     id="carousel"
-                    className="flex-1 flex items-center justify-center px-6 pt-20"
+                    className="flex flex-col items-center justify-center py-20 min-h-[70vh]"
                 >
-                    <div className="text-center max-w-2xl">
+                    {/* Constrained text content */}
+                    <div className="text-center max-w-2xl w-full px-6">
                         <img
                             src={logo}
                             alt="Shadesmar"
@@ -64,19 +62,20 @@ export function Home() {
                         <p className="text-4xl font-bold mb-4">
                             Welcome to Shadesmar
                         </p>
-
                         <p className="text-lg text-gray-600 mb-10 leading-relaxed">
                             Beat the Vancouver heat this summer. Shadesmar helps
                             you discover shaded locations and cool activities
                             near you so you can enjoy the outdoors without the
                             scorching sun.
                         </p>
+                    </div>
 
-                        {/* Activity Carousel */}
-                        <div
-                            id="ActivitiesList"
-                            className="flex gap-4 overflow-x-auto pb-2 mb-8 snap-x snap-mandatory"
-                        >
+                    {/* Activity Carousel — full width, outside max-w-2xl */}
+                    <div
+                        id="ActivitiesList"
+                        className="w-full overflow-x-auto pb-4 mb-8"
+                    >
+                        <div className="flex gap-4 snap-x snap-mandatory px-6">
                             {activities.length > 0 ? (
                                 activities.map((activity) => (
                                     <div
@@ -84,7 +83,6 @@ export function Home() {
                                         className="snap-start shrink-0 w-64"
                                     >
                                         <ActivityCard
-                                            key={activity._id}
                                             id={activity._id}
                                             title={activity.name}
                                             description={activity.description}
@@ -101,13 +99,14 @@ export function Home() {
                                 </p>
                             )}
                         </div>
-
-                        <Link to="/exploration">
-                            <button className="px-6 py-3 rounded-lg font-medium bg-a4 transition hover:opacity-90">
-                                Start Exploring
-                            </button>
-                        </Link>
                     </div>
+
+                    {/* Button */}
+                    <Link to="/exploration">
+                        <button className="px-6 py-3 rounded-lg font-medium bg-a4 transition hover:opacity-90">
+                            Start Exploring
+                        </button>
+                    </Link>
                 </header>
 
                 {/* Features */}
