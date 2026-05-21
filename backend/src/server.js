@@ -19,6 +19,7 @@ const PORT = process.env.PORT || 3001;
 // External modules
 const mongoose = require("mongoose");
 const session = require("express-session");
+const path = require("path");
 
 // Internal modules
 const sessionConfig = require("./config/session");
@@ -53,6 +54,7 @@ async function main() {
     }
 
     // Setup
+    app.use(express.static(path.join(__dirname, "client/dist")));
     app.use(helmetConfig);
     app.use(sessionConfig);
 
@@ -81,6 +83,11 @@ async function main() {
 
     // AI
     app.use("/api/ai", aiRoutes);
+
+    // Fallback to send page
+    app.get("/{*path}", (req, res) => {
+        res.sendFile(path.join(__dirname, "client/dist", "index.html"));
+    });
 
     // Start listening
     app.listen(PORT, () => {
