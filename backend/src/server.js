@@ -54,7 +54,7 @@ async function main() {
     }
 
     // Setup
-    app.use(express.static(path.join(__dirname, "client/dist")));
+    app.use(express.static(path.join(__dirname, "../../shadesmar/dist")));
     app.use(helmetConfig);
     app.use(sessionConfig);
 
@@ -86,7 +86,7 @@ async function main() {
 
     // Fallback to send page
     app.get("/{*path}", (req, res) => {
-        res.sendFile(path.join(__dirname, "client/dist", "index.html"));
+        res.sendFile(path.join(__dirname, "../../shadesmar/dist", "index.html"));
     });
 
     // Start listening
