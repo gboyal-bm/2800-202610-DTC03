@@ -2,13 +2,18 @@ const { GoogleGenAI } = require("@google/genai");
 require("dotenv").config();
 
 const key = process.env.GEMINI_API_KEY;
+
 let ai = null;
 
 async function getAI() {
     if (!ai) {
-        ai = new GoogleGenAI({
-            apiKey: key,
-        });
+        try {
+            ai = new GoogleGenAI({
+                apiKey: key,
+            });
+        } catch (error) {
+            console.error("Failed to initialize GoogleGenAI:", error);
+        }
     }
 
     return ai;
