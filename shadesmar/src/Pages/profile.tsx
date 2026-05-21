@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { ShadesmarApi } from "../utils/shadesmar_api";
 import { BadgeCard } from "../components/badgeCard";
