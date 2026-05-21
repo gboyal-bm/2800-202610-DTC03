@@ -6,7 +6,9 @@
     "author": "",
     "type": "commonjs",
     "main": "server.js",
-    "scripts": {},
+    "scripts": {
+        "test": "nodemon src/server.js"
+    },
     "dependencies": {
         "@google/genai": "^2.2.0",
         "bcrypt": "^6.0.0",

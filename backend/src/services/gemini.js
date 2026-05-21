@@ -7,7 +7,7 @@ let ai = null;
 async function getAI() {
     if (!ai) {
         ai = new GoogleGenAI({
-            apiKey: process.env.GEMINI_KEY,
+            apiKey: "AIzaSyCTndAW4W5hvNzzfCUv7w1Eh0Sm2TyaFh8",
         });
     }
 
@@ -16,7 +16,9 @@ async function getAI() {
 
 async function sendMessage(message) {
     const aiInstance = await getAI();
-    const response = await ai.models.generateContent({
+    console.log(aiInstance);
+
+    const response = await aiInstance.models.generateContent({
         model: "gemini-2.5-flash",
         contents: message,
     });
