@@ -30,6 +30,7 @@ export async function recommendActivities(info: string) {
                 '''
                 ${info}
                 '''
+                If that info is not useful, find out what the weather and temperature is like in Vancouver, and recommend some activity based on that.
 
                 Don't break character, and don't give a long answer. Please keep it concise, one or two sentences maximum.
             `,
