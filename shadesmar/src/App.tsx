@@ -65,45 +65,13 @@ function App() {
                     />
                     <Route
                         path="/request-activity"
-                        element={
-                            <ProtectedRoute>
-                                <ActivityRequest />
-                            </ProtectedRoute>
-                        }
+                        element={<ActivityRequest />}
                     />
                     {/* Protected routes */}
-                    <Route
-                        path="/exploration"
-                        element={
-                            <ProtectedRoute>
-                                <Exploration />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/map"
-                        element={
-                            <ProtectedRoute>
-                                <Map />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/profile"
-                        element={
-                            <ProtectedRoute>
-                                <Profile />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/about"
-                        element={
-                            <ProtectedRoute>
-                                <About />
-                            </ProtectedRoute>
-                        }
-                    />
+                    <Route path="/exploration" element={<Exploration />} />
+                    <Route path="/map" element={<Map />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/about" element={<About />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </AuthProvider>
