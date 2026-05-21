@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { AdminRoute } from "./components/adminRoute";
 import { Admin } from "./Pages/admin";
+import { About } from "./Pages/about";
 import { ActivityRequest } from "./Pages/activityRequest";
 
 const pageTitles: Record<string, string> = {
@@ -28,6 +29,7 @@ const pageTitles: Record<string, string> = {
     "/login": "Shadesmar - Login",
     "/register": "Shadesmar - Register",
     "/admin": "Shadesmar - Admin",
+    "/about": "Shadesmar - About Us",
 };
 
 function TitleManager() {
@@ -94,7 +96,14 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
-
+                    <Route
+                        path="/about"
+                        element={
+                            <ProtectedRoute>
+                                <About />
+                            </ProtectedRoute>
+                        }
+                    />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </AuthProvider>
