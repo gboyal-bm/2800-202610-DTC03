@@ -44,28 +44,9 @@ We learned that using APIs and external libraries can speed up development signi
 
 ### API
 
-- Google Maps API
-- OpenWeather API
-- Gemini
-  oitaercgbemlpmihtiw tsissa ot secrfuoser IAdna noitatnemucodIPA ehtIA
-  ezilitesu ot denrael ew tub ,tluciffisaw tcejorp ehtkropw gniht tliub ew elihwtluciffid sasloot wen gninraeL
-
-### Frontend
-
-- React
-- Vite
-- Typescript
-
-### Backend/Database
-
-- Express
-- Mongodb
-
-### API
-
 - Google Maps API was used t build a functional dynamic 2d map with seeded activities
 - OpenWeather API was used to track weather andtemperature of activity locations
-- Geminiwas used to provide activities based on user given prompts
+- Gemini was used to provide activities based on user given prompts
 
 ## ✨ File Contents
 
