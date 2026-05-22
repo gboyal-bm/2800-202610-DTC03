@@ -179,9 +179,13 @@ cd shadesmar && npm run dev
 
 ## 🤝 Credits and References
 
-It was a great oppurtunity to have
+It was a great oppurtunity to have collaborated on Shadesmar for Comp 2800 at BCIT.
 
-A huge thank you to our instructors [Tag Instructor 1] and [Tag Instructor 2] for their incredible insights on [mention 1-2 specific topics you learned].
+A huge thank you to our instructors Marco and Carly for conducting this projects term and our supervisor Charles for the provided insights.
+
+## License
+
+All Rights Reserved.
 
 ## 🗨️ Contacts
 
