@@ -54,6 +54,7 @@ async function main() {
     }
 
     // Setup
+    app.set("trust proxy", 1);
     app.use(express.static(path.join(__dirname, "../../shadesmar/dist")));
     app.use(helmetConfig);
     app.use(sessionConfig);
