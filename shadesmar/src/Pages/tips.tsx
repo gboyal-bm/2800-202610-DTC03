@@ -1,5 +1,3 @@
-//import { useEffect } from "react";
-//import { tipTour } from "../components/tours"; disabled for ease of developement
 export function Tips() {
     const summerTips = [
         {

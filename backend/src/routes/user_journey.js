@@ -1,7 +1,7 @@
 /**
  * @fileoverview User journey and progress routes
  * @module routes/user_journey
- * 
+ *
  * @description Defines routes for managing user journeys and progress.
  */
 
@@ -34,7 +34,5 @@ router.use(authMiddleware.authenticate);
 router.get("/experience", getExperience);
 router.post("/experience", addExperience);
 router.delete("/experience", removeExperience);
-
-
 
 module.exports = router;

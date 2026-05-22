@@ -1,7 +1,7 @@
 /**
  * @fileoverview Activities routes
  * @module routes/activity
- * 
+ *
  * @description Defines routes for finding and managing activities.
  */
 
@@ -14,6 +14,7 @@ const router = express.Router();
 // Internal modules
 
 const authMiddleware = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
 // Controllers
 const {
@@ -21,7 +22,7 @@ const {
     getActivityById,
     createActivity,
     updateActivity,
-    deleteActivity
+    deleteActivity,
 } = require("../controllers/activity");
 
 // Routes
@@ -32,7 +33,7 @@ router.get("/:id", getActivityById);
 
 // Protected routes
 router.use(authMiddleware.authenticate);
-// TODO router.use(authMiddleware.authorize("admin"));
+router.use(admin);
 
 router.post("/create", createActivity);
 router.put("/update/:id", updateActivity);

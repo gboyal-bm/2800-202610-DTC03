@@ -1,15 +1,19 @@
 /**
  * @fileoverview Debugging utilities
  * @module utils/debug
- * 
+ *
  * @description Provides utility functions for debugging the server.
  * @exports debugIncomingRequest
- * 
+ *
  * @author Alex Lu
  */
 
+/**
+ * @function debugIncomingRequest
+ * @description Logs incoming requests for debugging purposes.
+ */
 function debugIncomingRequest(req, res, next) {
-    console.log( `
+    console.log(`
 -------------------------------------------
     Request: ${req.method} ${req.url}
 
@@ -20,6 +24,5 @@ function debugIncomingRequest(req, res, next) {
     `);
     next();
 }
-
 
 module.exports = { debugIncomingRequest };

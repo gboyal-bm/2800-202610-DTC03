@@ -6,6 +6,7 @@
  * @exports UserPreferences
  * 
  * @author Alex Lu
+ * @version to be implemented
  */
 
 // Imports

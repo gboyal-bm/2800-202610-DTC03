@@ -1,6 +1,23 @@
+/**
+ * @fileoverview Controller for handling activity requests
+ * @module controllers/activity_request
+ *
+ * @description Defines controller functions for managing activity requests.
+ * @exports createRequest
+ * @exports getRequests
+ * @exports updateRequestStatus
+ *
+ * @author Gurkaren Boyle
+ */
+
 const ActivityRequest = require("../models/activity_requests");
 const Activity = require("../models/activity");
 
+/**
+ * @function createRequest
+ *
+ * @description Creates a new activity request with the provided details and the ID of the requesting user.
+ */
 exports.createRequest = async (req, res) => {
     try {
         const request = await ActivityRequest.create({
@@ -16,6 +33,11 @@ exports.createRequest = async (req, res) => {
     }
 };
 
+/**
+ * @function getRequests
+ *
+ * @description Retrieves all activity requests, including the username and email of the requesting user, sorted by creation date in descending order.
+ */
 exports.getRequests = async (_req, res) => {
     try {
         const requests = await ActivityRequest.find()
@@ -30,6 +52,11 @@ exports.getRequests = async (_req, res) => {
     }
 };
 
+/**
+ * @function updateRequestStatus
+ *
+ * @description Updates the status of an activity request. If the request is approved, a new activity is created with the details from the request.
+ */
 exports.updateRequestStatus = async (req, res) => {
     try {
         const { status } = req.body;

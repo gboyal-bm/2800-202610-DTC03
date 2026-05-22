@@ -32,7 +32,6 @@ const authRoutes = require("./routes/auth");
 const activityRoutes = require("./routes/activity");
 const activityRequestRoutes = require("./routes/activity_requests");
 const userJourneyRoutes = require("./routes/user_journey");
-// const userPreferencesRoutes = require("./routes/user_preferences");
 const aiRoutes = require("./routes/ai");
 // Start server
 
@@ -79,19 +78,22 @@ async function main() {
     // User management
     app.use("/api/user", userJourneyRoutes);
 
-    // TODO: User preferences
-    // app.use("/api/user/preferences", userPreferencesRoutes);
-
     // AI
     app.use("/api/ai", aiRoutes);
 
-    // Fallback to send page
+    // Fallback to send frontend page
     app.get("/{*path}", (req, res) => {
-        res.sendFile(path.join(__dirname, "../../shadesmar/dist", "index.html"));
+        res.sendFile(
+            path.join(__dirname, "../../shadesmar/dist", "index.html")
+        );
     });
 
     // Start listening
     app.listen(PORT, () => {
-        console.log(`Server running on http://localhost:${PORT}`);
+        if (process.env.NODE_ENV === "development") {
+            console.log(`Server running on http://localhost:${PORT}`);
+        } else {
+            console.log(`Server running on port ${PORT}`);
+        }
     });
 }
