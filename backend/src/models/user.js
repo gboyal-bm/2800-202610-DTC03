@@ -1,7 +1,7 @@
 /**
  * @fileoverview User schema and model
  * @module models/user
- * 
+ *
  * @description Defines the User schema and model for account authentication.
  * @exports User
  */
@@ -11,23 +11,27 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 // Constants
-const { SALT_ROUNDS, PASSWORD_MIN_LENGTH, VALID_EMAIL_REGEX } = require("../constants");
+const {
+    SALT_ROUNDS,
+    PASSWORD_MIN_LENGTH,
+    VALID_EMAIL_REGEX,
+} = require("../constants");
 
 /**
  * @typedef {Object} User
  * @description User account.
- * 
+ *
  * @property {string} username - The user's public username
  * @property {string} email - The user's email address
  * @property {string} password - The user's encrypted password
  * @property {Date} createdAt - The timestamp of user creation
- * 
+ *
  * Modified from Claude Sonnet 4.6 snippet.
  */
 
 /**
  * @description User account schema.
- * 
+ *
  * @type {mongoose.Schema<User>}
  */
 const userSchema = new mongoose.Schema({
@@ -35,7 +39,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minLength: [1, "Username cannot be empty."],
-        trim: true
+        trim: true,
     },
     email: {
         type: String,
@@ -43,27 +47,32 @@ const userSchema = new mongoose.Schema({
         unique: true,
         lowercase: true,
         trim: true,
-        match: [VALID_EMAIL_REGEX, "Email must be of valid format."]
+        match: [VALID_EMAIL_REGEX, "Email must be of valid format."],
     },
     password: {
         type: String,
         required: true,
         minLength: [
             PASSWORD_MIN_LENGTH,
-            `Password must be at least ${PASSWORD_MIN_LENGTH} characters long`
+            `Password must be at least ${PASSWORD_MIN_LENGTH} characters long`,
         ],
-        select: false
+        select: false,
     },
     createdAt: {
         type: Date,
         default: Date.now,
-        immutable: true
-    }
+        immutable: true,
+    },
+    role: {
+        type: String,
+        enum: ["user", "admin"],
+        default: "user",
+    },
 });
 
 /**
  * @description Pre-save middleware to encrypt password before saving user info.
- * 
+ *
  * @function
  * @description Hash the password.
  * @returns {Promise<void>}
@@ -77,10 +86,10 @@ userSchema.pre("save", async function () {
 /**
  * @function comparePassword
  * @description Compare password attempt to stored password.
- * 
+ *
  * @param {string} passwordAttempt - The plaintext password attempt
  * @returns {Promise<boolean>}     - Whether the password attempt is correct
- *                                     true if correct 
+ *                                     true if correct
  */
 userSchema.methods.comparePassword = async function (passwordAttempt) {
     console.log(this);
@@ -89,7 +98,7 @@ userSchema.methods.comparePassword = async function (passwordAttempt) {
 
 /**
  * @description User account model.
- * 
+ *
  * @type {mongoose.Model<User>}
  */
 const User = mongoose.model("User", userSchema);

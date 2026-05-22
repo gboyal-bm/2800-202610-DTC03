@@ -1,7 +1,7 @@
 /**
  * @fileoverview Helpers for handling sessions and user authentication
  * @module utils/auth
- * 
+ *
  * @description Provides utility functions for managing user sessions and authentication in the application..
  * @exports startSession
  */
@@ -9,21 +9,32 @@
 // Imports
 
 // Internal modules
-const { REMEMBER_ME_COOKIE_AGE, PASSWORD_MIN_LENGTH, VALID_EMAIL_REGEX } = require("../constants");
+const {
+    REMEMBER_ME_COOKIE_AGE,
+    PASSWORD_MIN_LENGTH,
+    VALID_EMAIL_REGEX,
+} = require("../constants");
 const { daysToMilliseconds } = require("./conversions");
 
 const startSession = (req, user, rememberMe) => {
     req.session.user = {
         id: user._id,
+        _id: user._id,
         username: user.username,
-        email: user.email
+        email: user.email,
+        role: user.role,
     };
     req.session.cookie.maxAge = rememberMe
         ? daysToMilliseconds(REMEMBER_ME_COOKIE_AGE)
         : null;
 };
 
-const validateNewUserFields = async (errorMessages, email, username, password) => {
+const validateNewUserFields = async (
+    errorMessages,
+    email,
+    username,
+    password
+) => {
     if (email.trim().length === 0) {
         errorMessages.push("Email cannot be empty.");
     }
@@ -32,7 +43,8 @@ const validateNewUserFields = async (errorMessages, email, username, password) =
     }
     if (password.length < PASSWORD_MIN_LENGTH) {
         errorMessages.push(
-            `Password must be at least ${PASSWORD_MIN_LENGTH} characters long.`);
+            `Password must be at least ${PASSWORD_MIN_LENGTH} characters long.`
+        );
     }
     if (!VALID_EMAIL_REGEX.test(email)) {
         errorMessages.push("Email must be of valid format.");
@@ -41,5 +53,5 @@ const validateNewUserFields = async (errorMessages, email, username, password) =
 
 module.exports = {
     startSession,
-    validateNewUserFields
+    validateNewUserFields,
 };

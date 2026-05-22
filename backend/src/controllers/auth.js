@@ -13,12 +13,13 @@
 
 // Internal modules
 
-const {startSession, validateNewUser} = require("../utils/auth");
+const { startSession, validateNewUser } = require("../utils/auth");
 
 const User = require("../models/user");
-const UserPreferences = require("../models/user_preferences");
-const {SESSION_NAME} = require("../constants");
-const {default: mongoose} = require("mongoose");
+// const UserPreferences = require("../models/user_preferences");
+const UserJourney = require("../models/user_journey");
+const { SESSION_NAME } = require("../constants");
+const { default: mongoose } = require("mongoose");
 
 /**
  * @function register
@@ -28,12 +29,12 @@ const {default: mongoose} = require("mongoose");
  * @param {Object} res
  */
 const register = async (req, res) => {
-    const {email, username, password, rememberMe} = req.body;
+    const { email, username, password, rememberMe } = req.body;
 
     const session = await mongoose.startSession();
     session.startTransaction();
 
-    const newUser = new User({username, email, password});
+    const newUser = new User({ username, email, password });
     try {
         try {
             await newUser.save();
@@ -53,9 +54,9 @@ const register = async (req, res) => {
                 message: "Server error: " + err.message,
             });
         }
-        const userPreferences = new UserPreferences({userId: newUser._id});
+        const userJourney = new UserJourney({ userId: newUser._id });
         try {
-            await userPreferences.save();
+            await userJourney.save();
         } catch (err) {
             await session.abortTransaction();
             return res.status(500).json({
@@ -80,20 +81,20 @@ const register = async (req, res) => {
  * @param {Object} res
  */
 const login = async (req, res) => {
-    const {email, password, rememberMe} = req.body;
+    const { email, password, rememberMe } = req.body;
 
-    const user = await User.findOne({email}).select("+password");
+    const user = await User.findOne({ email }).select("+password");
     if (!user) {
-        return res.status(401).json({message: "Invalid email or password"});
+        return res.status(401).json({ message: "Invalid email or password" });
     }
 
     const passwordCorrect = await user.comparePassword(password);
     if (!passwordCorrect) {
-        return res.status(401).json({message: "Invalid email or password"});
+        return res.status(401).json({ message: "Invalid email or password" });
     }
 
     startSession(req, user, rememberMe);
-    res.status(200).json({message: "Login successful"});
+    res.status(200).json({ message: "Login successful" });
 };
 
 /**
@@ -106,10 +107,10 @@ const login = async (req, res) => {
 const logout = async (req, res) => {
     req.session.destroy((err) => {
         if (err) {
-            return res.status(500).json({message: "Logout failed"});
+            return res.status(500).json({ message: "Logout failed" });
         }
         res.clearCookie(SESSION_NAME);
-        res.status(200).json({message: "Logout successful"});
+        res.status(200).json({ message: "Logout successful" });
     });
 };
 
@@ -127,12 +128,17 @@ const getMe = async (req, res) => {
     try {
         user = await User.findById(req.session.user.id);
     } catch (err) {
-        return res.status(500).json({message: "Server error: " + err.message});
+        return res
+            .status(500)
+            .json({ message: "Server error: " + err.message });
     }
     res.status(200).json({
+        _id: user._id,
+        id: user._id,
         username: user.username,
         email: user.email,
         createdAt: user.createdAt,
+        role: user.role,
     });
 };
 
