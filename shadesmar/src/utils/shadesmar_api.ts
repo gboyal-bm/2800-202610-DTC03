@@ -1,3 +1,4 @@
+const BASE_URL = import.meta.env.VITE_API_URL ?? "";
 /**
  * @fileoverview Utilities for interacting with the Shadesmar API
  * @module utils/shadesmar_api
@@ -50,7 +51,7 @@ async function apiFetch(
     let result: object | null = null;
     let status: number | null = null;
     try {
-        const response = await fetch(`/api${endpoint}`, {
+        const response = await fetch(`${BASE_URL}/api${endpoint}`, {
             headers: {
                 "Content-Type": "application/json",
             },
@@ -141,7 +142,7 @@ async function addExperience(experience: number): Promise<object | null> {
 /**
  * @function getExperience
  * @description Fetches the currently logged in user's experience points.
- * 
+ *
  * @returns {Promise<number | Object | null>} - The formatted JSON response with result.experience, or null if no use is logged in
  */
 async function getExperience(): Promise<object | null> {
