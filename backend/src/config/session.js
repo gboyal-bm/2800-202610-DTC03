@@ -22,5 +22,9 @@ module.exports = session({
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
-    cookie: { secure: process.env.NODE_ENV === "production" },
+    cookie: {
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        httpOnly: true,
+    },
 });
