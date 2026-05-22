@@ -3,7 +3,9 @@
  * @module models/user_journey
  *
  * @description Defines the journey for user progress
- * @exports UserJourney
+ * @exports getExperience
+ * @exports addExperience
+ * @exports removeExperience
  *
  * @author Alex Lu
  */
@@ -19,6 +21,11 @@ const UserJourney = require("../models/user_journey");
 
 // Get user experience points
 
+/**
+ * @function getExperience
+ *
+ * @description Retrieves the user's current experience points from their user journey and returns it in the response.
+ */
 const getExperience = async (req, res) => {
     let userJourney = undefined;
     try {
@@ -34,6 +41,11 @@ const getExperience = async (req, res) => {
 
 // Add experience points to user journey
 
+/**
+ * @function addExperience
+ *
+ * @description Adds experience points to the user's current total in their user journey and returns the updated total in the response.
+ */
 const addExperience = async (req, res) => {
     const { experience } = req.body;
     if (typeof experience !== "number" || experience <= 0) {
@@ -57,6 +69,11 @@ const addExperience = async (req, res) => {
 
 // Remove experience points from user journey
 
+/**
+ * @function removeExperience
+ *
+ * @description Removes experience points from the user's current total in their user journey and returns the updated total in the response.
+ */
 const removeExperience = async (req, res) => {
     const { experience } = req.body;
     if (typeof experience !== "number" || experience <= 0) {
@@ -78,5 +95,4 @@ const removeExperience = async (req, res) => {
     res.status(200).json({ experience: userJourney.experience });
 };
 
-// Constants
 module.exports = { getExperience, addExperience, removeExperience };

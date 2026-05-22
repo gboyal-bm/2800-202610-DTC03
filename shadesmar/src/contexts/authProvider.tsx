@@ -1,19 +1,18 @@
 /**
  * @fileoverview Provider for user authentication state
  * @module contexts/AuthProvider
- * 
+ *
  * @description Provides a React context for managing user authentication state,
  *              including the current user and loading status. Access fields with useAuth() hook.
  * @exports AuthProvider
- * 
+ *
  * Modified from Claude Sonnet 4.6 snippet.
  */
 
 import { useEffect, useState } from "react";
-import { ShadesmarApi } from "../utils/shadesmar_api"
+import { ShadesmarApi } from "../utils/shadesmar_api";
 import { AuthContext } from "./authContext";
 import { useLocation } from "react-router-dom";
-
 
 interface AuthProviderProps {
     children: React.ReactNode;
@@ -44,4 +43,4 @@ export function AuthProvider({ children }: AuthProviderProps) {
             {children}
         </AuthContext.Provider>
     );
-};
+}

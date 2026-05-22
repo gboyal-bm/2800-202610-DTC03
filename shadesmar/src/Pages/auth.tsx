@@ -33,10 +33,14 @@ export function Auth({ mode }: AuthModes) {
         setErrors([]);
 
         try {
-            const result = await ShadesmarApi.apiFetch(`/auth/${mode}`, {
-                method: "POST",
-                body: JSON.stringify(form),
-            }, true);
+            const result = await ShadesmarApi.apiFetch(
+                `/auth/${mode}`,
+                {
+                    method: "POST",
+                    body: JSON.stringify(form),
+                },
+                true
+            );
 
             // Status is 200 for login or 201 for registration
             if (result.ok) {
@@ -130,7 +134,8 @@ export function Auth({ mode }: AuthModes) {
                 </div>
 
                 <div className="flex flex-row gap-2 items-center justify-baseline">
-                    <input className="size-5"
+                    <input
+                        className="size-5"
                         type="checkbox"
                         name="rememberMe"
                         id="rememberMe"

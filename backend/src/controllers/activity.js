@@ -23,6 +23,11 @@ const Activity = require("../models/activity");
 
 // Find activities
 
+/**
+ * @function getActivities
+ *
+ * @description Retrieves all activities from the database and returns them in the response, along with a count of the total number of activities.
+ */
 const getActivities = async (req, res) => {
     let activities = undefined;
     try {
@@ -38,6 +43,11 @@ const getActivities = async (req, res) => {
     });
 };
 
+/**
+ * @function getActivityById
+ *
+ * @description Retrieves an activity by its ID from the database and returns it in the response.
+ */
 const getActivityById = async (req, res) => {
     try {
         const activity = await Activity.findById(req.params.id);
@@ -52,6 +62,11 @@ const getActivityById = async (req, res) => {
 
 // Manage activities (admin locked)
 
+/**
+ * @function createActivity
+ *
+ * @description Creates a new activity with the provided details.
+ */ 
 const createActivity = async (req, res) => {
     const { name, location, category, description } = req.body;
     const activity = new Activity({ name, location, category, description });
@@ -72,6 +87,11 @@ const createActivity = async (req, res) => {
     res.status(201).json({ message: "Activity created" });
 };
 
+/**
+ * @function updateActivity
+ *
+ * @description Updates an existing activity with the provided details.
+ */
 const updateActivity = async (req, res) => {
     const { name, location, category, description } = req.body;
     const updated = Object.fromEntries(
@@ -95,6 +115,11 @@ const updateActivity = async (req, res) => {
     res.status(200).json(activity);
 };
 
+/**
+ * @function deleteActivity
+ *
+ * @description Deletes an existing activity from the database.
+ */
 const deleteActivity = async (req, res) => {
     try {
         const activity = await Activity.findByIdAndDelete(req.params.id);

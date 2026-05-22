@@ -1,4 +1,3 @@
-// import { Link } from "react-router-dom";
 import { ShadesmarApi } from "../utils/shadesmar_api";
 import type { ApiResponse } from "../utils/shadesmar_api";
 import { useAuth } from "../contexts/authContext";
@@ -10,7 +9,6 @@ interface ActivityCardProps {
     imageSrc: string;
     category: string;
 }
-
 
 export function ActivityCard({
     title,
@@ -28,7 +26,6 @@ export function ActivityCard({
         }
     };
     return (
-        // <Link to={`/activity/${id}`}>
         <div>
             <div className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg active:bg-slate-200">
                 {/* Monochrome to Color Image Container */}
@@ -65,6 +62,5 @@ export function ActivityCard({
                 </div>
             </div>
         </div>
-        // </Link>
     );
 }

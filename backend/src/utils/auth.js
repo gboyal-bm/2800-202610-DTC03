@@ -2,7 +2,7 @@
  * @fileoverview Helpers for handling sessions and user authentication
  * @module utils/auth
  *
- * @description Provides utility functions for managing user sessions and authentication in the application..
+ * @description Provides utility functions for managing user sessions and authentication in the application.
  * @exports startSession
  */
 
@@ -29,6 +29,15 @@ const startSession = (req, user, rememberMe) => {
         : null;
 };
 
+/**
+ * @function validateNewUserFields
+ * @description Validates the fields for a new user.
+ *
+ * @param {string} errorMessages - The collection to store the generated messages
+ * @param {string} email - The email to validate
+ * @param {string} username - The username to validate
+ * @param {string} password - The password to validate
+ */
 const validateNewUserFields = async (
     errorMessages,
     email,

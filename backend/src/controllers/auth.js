@@ -6,7 +6,7 @@
  * @exports register
  * @exports login
  * @exports logout
- * @exports me
+ * @exports getMe
  */
 
 // Imports
@@ -16,7 +16,6 @@
 const { startSession, validateNewUser } = require("../utils/auth");
 
 const User = require("../models/user");
-// const UserPreferences = require("../models/user_preferences");
 const UserJourney = require("../models/user_journey");
 const { SESSION_NAME } = require("../constants");
 const { default: mongoose } = require("mongoose");

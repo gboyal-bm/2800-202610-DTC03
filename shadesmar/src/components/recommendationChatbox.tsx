@@ -27,7 +27,11 @@ export function RecommendationChatbox() {
 
     return (
         <aside>
-            {loading ? <p className="animate-pulse">Loading...</p> : <p>{suggestion}</p>}
+            {loading ? (
+                <p className="animate-pulse">Loading...</p>
+            ) : (
+                <p>{suggestion}</p>
+            )}
         </aside>
     );
 }

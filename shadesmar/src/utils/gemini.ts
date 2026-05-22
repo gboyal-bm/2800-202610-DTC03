@@ -1,3 +1,20 @@
+/**
+ * @fileoverview Utilities for interacting with the Gemini API
+ * @module utils/gemini
+ *
+ * @description Provides functions to interact with the Gemini API, abstracting the process
+ *              of fetching data and automatic redirects.
+ * @exports sendMessage
+ * @exports recommendActivities
+ */
+
+/**
+ * @function sendMessage
+ * @description Sends a message to the Gemini API and returns the generated response.
+ *
+ * @param {string} message - The message to send to the Gemini API for generating a response
+ * @returns {Promise<string>} The generated response from the Gemini API
+ */
 export async function sendMessage(message: string) {
     const response = await fetch("/api/ai/generateMessage", {
         method: "POST",
@@ -13,6 +30,13 @@ export async function sendMessage(message: string) {
     return data.response;
 }
 
+/**
+ * @function recommendActivities
+ * @description Sends user info to the Gemini API and returns a recommended activity based on that info.
+ * 
+ * @param {string} info - The user info to send to the Gemini API
+ * @returns {Promise<string>} The recommended activity from the Gemini API
+ */
 export async function recommendActivities(info: string) {
     const response = await fetch("/api/ai/generateMessage", {
         method: "POST",
