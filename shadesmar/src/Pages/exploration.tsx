@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { ActivityCard } from "../components/activityCard";
 import { FloatingButton } from "../components/floatingButton";
 import { RecommendationChatbox } from "../components/recommendationChatbox";
@@ -34,11 +34,226 @@ function getImage(category: string): string {
     return CATEGORY_IMAGES[category.toLowerCase()] ?? FALLBACK_IMAGE;
 }
 
+// ── Shadesmar Easter-Egg Overlay ──────────────────────────────────────────────
+function ShadesmarOverlay({ onDismiss }: { onDismiss: () => void }) {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        let animId: number;
+        let t = 0;
+
+        function resize() {
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        // Floating orbs (beads of the Cognitive Realm)
+        const orbs = Array.from({ length: 60 }, () => ({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            r: 2 + Math.random() * 5,
+            speedX: (Math.random() - 0.5) * 0.4,
+            speedY: (Math.random() - 0.5) * 0.4,
+            hue: 180 + Math.random() * 60, // teal-to-blue palette
+            alpha: 0.4 + Math.random() * 0.6,
+        }));
+
+        function draw() {
+            if (!canvas || !ctx) return;
+            t += 0.012;
+
+            // Deep dark background with slight radial highlight
+            const bg = ctx.createRadialGradient(
+                canvas.width / 2,
+                canvas.height / 2,
+                0,
+                canvas.width / 2,
+                canvas.height / 2,
+                canvas.width * 0.8
+            );
+            bg.addColorStop(0, "rgba(5, 18, 40, 0.92)");
+            bg.addColorStop(1, "rgba(0, 0, 10, 0.98)");
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Rippling connection lines between orbs (like Shadesmar bonds)
+            ctx.lineWidth = 0.4;
+            for (let i = 0; i < orbs.length; i++) {
+                for (let j = i + 1; j < orbs.length; j++) {
+                    const dx = orbs[j].x - orbs[i].x;
+                    const dy = orbs[j].y - orbs[i].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        const fade = 1 - dist / 120;
+                        ctx.strokeStyle = `rgba(100, 200, 255, ${fade * 0.25})`;
+                        ctx.beginPath();
+                        ctx.moveTo(orbs[i].x, orbs[i].y);
+                        ctx.lineTo(orbs[j].x, orbs[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Draw orbs
+            for (const orb of orbs) {
+                orb.x += orb.speedX;
+                orb.y += orb.speedY;
+                if (orb.x < 0) orb.x = canvas.width;
+                if (orb.x > canvas.width) orb.x = 0;
+                if (orb.y < 0) orb.y = canvas.height;
+                if (orb.y > canvas.height) orb.y = 0;
+
+                const pulse = 0.7 + 0.3 * Math.sin(t * 2 + orb.x);
+                const g = ctx.createRadialGradient(
+                    orb.x,
+                    orb.y,
+                    0,
+                    orb.x,
+                    orb.y,
+                    orb.r * 3
+                );
+                g.addColorStop(
+                    0,
+                    `hsla(${orb.hue}, 90%, 80%, ${orb.alpha * pulse})`
+                );
+                g.addColorStop(1, `hsla(${orb.hue}, 90%, 50%, 0)`);
+                ctx.fillStyle = g;
+                ctx.beginPath();
+                ctx.arc(orb.x, orb.y, orb.r * 3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Central portal ring
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const baseR = Math.min(canvas.width, canvas.height) * 0.18;
+
+            for (let ring = 0; ring < 4; ring++) {
+                const r = baseR + ring * 18 + Math.sin(t + ring) * 6;
+                const alpha =
+                    (0.6 - ring * 0.12) * (0.7 + 0.3 * Math.sin(t * 1.5));
+                ctx.strokeStyle = `rgba(80, 200, 255, ${alpha})`;
+                ctx.lineWidth = 2 - ring * 0.3;
+                ctx.beginPath();
+                ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            // Rotating spokes
+            for (let s = 0; s < 8; s++) {
+                const angle = t * 0.4 + (s * Math.PI * 2) / 8;
+                const inner = baseR * 0.3;
+                const outer = baseR * 0.95;
+                ctx.strokeStyle = `rgba(120, 220, 255, ${0.15 + 0.1 * Math.sin(t + s)})`;
+                ctx.lineWidth = 0.8;
+                ctx.beginPath();
+                ctx.moveTo(
+                    cx + Math.cos(angle) * inner,
+                    cy + Math.sin(angle) * inner
+                );
+                ctx.lineTo(
+                    cx + Math.cos(angle) * outer,
+                    cy + Math.sin(angle) * outer
+                );
+                ctx.stroke();
+            }
+
+            // Glowing core
+            const core = ctx.createRadialGradient(
+                cx,
+                cy,
+                0,
+                cx,
+                cy,
+                baseR * 0.28
+            );
+            core.addColorStop(
+                0,
+                `rgba(180, 240, 255, ${0.6 + 0.3 * Math.sin(t * 2)})`
+            );
+            core.addColorStop(
+                0.5,
+                `rgba(60, 160, 220, ${0.3 + 0.2 * Math.sin(t * 1.7)})`
+            );
+            core.addColorStop(1, "rgba(10, 40, 80, 0)");
+            ctx.fillStyle = core;
+            ctx.beginPath();
+            ctx.arc(cx, cy, baseR * 0.28, 0, Math.PI * 2);
+            ctx.fill();
+
+            animId = requestAnimationFrame(draw);
+        }
+
+        draw();
+        return () => {
+            cancelAnimationFrame(animId);
+            window.removeEventListener("resize", resize);
+        };
+    }, []);
+
+    return (
+        <div
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center cursor-pointer"
+            onClick={onDismiss}
+            style={{ backdropFilter: "blur(2px)" }}
+        >
+            <canvas
+                ref={canvasRef}
+                className="absolute inset-0 w-full h-full"
+            />
+
+            {/* Text content */}
+            <div className="relative z-10 text-center pointer-events-none select-none">
+                <p
+                    className="text-xs uppercase tracking-[0.35em] mb-3"
+                    style={{ color: "rgba(100,200,255,0.7)" }}
+                >
+                    You have entered
+                </p>
+                <h1
+                    className="text-5xl sm:text-7xl font-bold mb-4"
+                    style={{
+                        color: "#a8e6ff",
+                        textShadow:
+                            "0 0 40px rgba(80,200,255,0.8), 0 0 80px rgba(40,140,220,0.4)",
+                        letterSpacing: "0.08em",
+                        fontFamily: "Georgia, serif",
+                    }}
+                >
+                    SHADESMAR
+                </h1>
+                <p
+                    className="text-sm sm:text-base max-w-xs mx-auto leading-relaxed"
+                    style={{ color: "rgba(160,220,255,0.6)" }}
+                >
+                    Enjoy the Shade and explore the hidden wonders of shade.
+                </p>
+                <p
+                    className="text-xs mt-6"
+                    style={{ color: "rgba(100,180,220,0.4)" }}
+                >
+                    tap anywhere to return
+                </p>
+            </div>
+        </div>
+    );
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
 export function Exploration() {
     const [activities, setActivities] = useState<Activity[]>([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
     const [categoryFilter, setCategoryFilter] = useState("all");
+    const [showShadesmar, setShowShadesmar] = useState(false);
 
     useEffect(() => {
         async function loadActivities() {
@@ -50,6 +265,13 @@ export function Exploration() {
         }
         loadActivities();
     }, []);
+
+    // Trigger the easter egg
+    useEffect(() => {
+        if (search.trim().toLowerCase() === "shadesmar") {
+            setShowShadesmar(true);
+        }
+    }, [search]);
 
     const categories = useMemo(() => {
         const cats = new Set(activities.map((a) => a.category));
@@ -71,6 +293,15 @@ export function Exploration() {
 
     return (
         <div className="min-h-screen bg-gray-50 px-6 py-12">
+            {showShadesmar && (
+                <ShadesmarOverlay
+                    onDismiss={() => {
+                        setShowShadesmar(false);
+                        setSearch("");
+                    }}
+                />
+            )}
+
             <div className="mx-auto max-w-6xl">
                 <Map />
 
@@ -129,7 +360,7 @@ export function Exploration() {
                         ))}
                     </div>
                 )}
-                <FloatingButton contents={<RecommendationChatbox/>}/>
+                <FloatingButton contents={<RecommendationChatbox />} />
             </div>
         </div>
     );
