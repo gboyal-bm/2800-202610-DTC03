@@ -2,7 +2,7 @@
 
 Due to the rise in temperature from climate change, we are creating an app that guides users to having a fun and enjoyable outdoor experience through a shade map and a leveling/achievement system for user guidance.
 
-[Shadesmar](https://two800-202610-dtc03.onrender.com/) is a web-app built to guiide outdoors fun.
+[Shadesmar](https://two800-202610-dtc03.onrender.com/) is a web-app built to guide outdoor fun during the summer heat.
 
 ## Table of Contents
 
@@ -12,7 +12,7 @@ Due to the rise in temperature from climate change, we are creating an app that 
 - [How to Run](#-how-to-run)
 - [Features](#-features)
 - [Credits and References](#-credits-and-references)
-- [License](#-license)
+- [License](#license)
 - [Contacts](#%EF%B8%8F-contacts)
 
 ## 🚀 About
@@ -44,28 +44,9 @@ We learned that using APIs and external libraries can speed up development signi
 
 ### API
 
-- Google Maps API
-- OpenWeather API
-- Gemini
-  oitaercgbemlpmihtiw tsissa ot secrfuoser IAdna noitatnemucodIPA ehtIA
-  ezilitesu ot denrael ew tub ,tluciffisaw tcejorp ehtkropw gniht tliub ew elihwtluciffid sasloot wen gninraeL
-
-### Frontend
-
-- React
-- Vite
-- Typescript
-
-### Backend/Database
-
-- Express
-- Mongodb
-
-### API
-
 - Google Maps API was used t build a functional dynamic 2d map with seeded activities
 - OpenWeather API was used to track weather andtemperature of activity locations
-- Geminiwas used to provide activities based on user given prompts
+- Gemini was used to provide activities based on user given prompts
 
 ## ✨ File Contents
 
@@ -74,20 +55,13 @@ root/
 ├── backend/
 │   ├── node_modules/
 │   ├── src/
-│   │   ├── config/
-│   │   │   └── ... (helmet, session config)
-│   │   ├── controllers/
-│   │   │   └── ... (activity, auth, user journey controllers)
-│   │   ├── middleware/
-│   │   │   └── ... (admin and auth middleware)
-│   │   ├── models/
-│   │   │   └── ... (activity, user, user journey, preferences models)
-│   │   ├── routes/
-│   │   │   └── ... (activity, ai, auth, user journey routes)
-│   │   ├── services/
-│   │   │   └── ... (gemini service)
-│   │   └── utils/
-│   │       └── ... (auth, conversions, database, debug utilities)
+│   │   ├── config/ # (helmet, session config)
+│   │   ├── controllers/ # (activity, auth, user journey controllers)
+│   │   ├── middleware/ # (admin and auth middleware)
+│   │   ├── models/ # (activity, user, user journey, preferences models)
+│   │   ├── routes/ # (activity, ai, auth, user journey routes)
+│   │   ├── services/ # (gemini service)
+│   │   └── utils/ # (auth, conversions, database, debug utilities)
 │   ├── constants.js
 │   ├── server.js
 │   ├── .env
@@ -96,14 +70,11 @@ root/
 │   ├── public/
 │   ├── src/
 │   │   ├── assets/
-│   │   ├── components/
-│   │   │   └── ... (Custom React components)
-│   │   ├── contexts/
-│   │   │   └── ... (Components/functions for global states)
+│   │   ├── components/ # (Custom React components)
+│   │   ├── contexts/ # (Components/functions for global states)
 │   │   ├── Pages/
 │   │   │   └── ...
-│   │   ├── utils/
-│   │   │   └── ... (gemini, shadesmar_api, weather utilities)
+│   │   ├── utils/ # (gemini, shadesmar_api, weather utilities)
 │   │   ├── App.css
 │   │   ├── App.tsx
 │   │   ├── main.tsx
